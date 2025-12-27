@@ -1,0 +1,42 @@
+# Deployment files with sensitive data
+Clarinet.toml
+testnet.toml
+devnet.toml
+
+# Wallet and key files
+wallets.json
+*.mnemonic
+*.key
+*.secret
+
+# Results and data files
+*-results.json
+*-results-*.json
+
+# Node modules
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Build artifacts
+.cache/
+
+# Environment
+.env
+.env.*
+
+# Settings with sensitive data
+settings/
+.env
+settings/
+wallets.json
+interaction-results*.json

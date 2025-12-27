@@ -1,0 +1,10 @@
+{
+  "name": "stacksmint",
+  "version": "1.0.0",
+  "description": "NFT minting platform on Stacks",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  }
+}

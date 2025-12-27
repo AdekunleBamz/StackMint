@@ -1,0 +1,17 @@
+{
+  "name": "stacksmint-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "14.0.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "@stacks/connect": "^7.7.0",
+    "@stacks/transactions": "^7.3.1"
+  }
+}

@@ -1,0 +1,46 @@
+---
+id: 0
+name: Mainnet deployment
+network: mainnet
+stacks-node: "https://api.mainnet.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoin.blockstack.com:8332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: sip009-nft-trait
+            expected-sender: SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N
+            cost: 4770
+            path: contracts/sip009-nft-trait.clar
+            anchor-block-only: true
+            clarity-version: 1
+        - contract-publish:
+            contract-name: stacksmint-collection
+            expected-sender: SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N
+            cost: 56850
+            path: contracts/stacksmint-collection.clar
+            anchor-block-only: true
+            clarity-version: 1
+        - contract-publish:
+            contract-name: stacksmint-marketplace
+            expected-sender: SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N
+            cost: 67100
+            path: contracts/stacksmint-marketplace.clar
+            anchor-block-only: true
+            clarity-version: 1
+        - contract-publish:
+            contract-name: stacksmint-nft
+            expected-sender: SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N
+            cost: 40780
+            path: contracts/stacksmint-nft.clar
+            anchor-block-only: true
+            clarity-version: 1
+        - contract-publish:
+            contract-name: stacksmint-treasury
+            expected-sender: SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N
+            cost: 27970
+            path: contracts/stacksmint-treasury.clar
+            anchor-block-only: true
+            clarity-version: 1
+      epoch: "2.05"

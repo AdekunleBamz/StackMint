@@ -1,0 +1,32 @@
+---
+id: 1
+name: Mainnet redeployment - failed contracts
+network: mainnet
+stacks-node: "https://api.mainnet.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoin.blockstack.com:8332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: stacksmint-treasury
+            expected-sender: SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N
+            cost: 100000
+            path: contracts/stacksmint-treasury.clar
+            anchor-block-only: true
+            clarity-version: 2
+        - contract-publish:
+            contract-name: stacksmint-collection
+            expected-sender: SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N
+            cost: 150000
+            path: contracts/stacksmint-collection.clar
+            anchor-block-only: true
+            clarity-version: 2
+        - contract-publish:
+            contract-name: stacksmint-marketplace
+            expected-sender: SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N
+            cost: 180000
+            path: contracts/stacksmint-marketplace.clar
+            anchor-block-only: true
+            clarity-version: 2
+      epoch: "3.0"
