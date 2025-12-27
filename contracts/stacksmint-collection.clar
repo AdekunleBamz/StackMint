@@ -22,3 +22,9 @@
     })
     (var-set collection-counter collection-id)
     (ok collection-id)))
+
+(define-read-only (get-collection (collection-id uint))
+  (map-get? collections collection-id))
+
+(define-read-only (get-collection-count)
+  (var-get collection-counter))
