@@ -1,28 +1,19 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { WalletProvider } from '@/context/WalletContext';
-import { ToastProvider } from '@/context/ToastContext';
+import './globals.css'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'StacksMint - NFT Minting Platform',
-  description: 'Mint, collect, and trade NFTs on the Stacks blockchain',
-  keywords: ['NFT', 'Stacks', 'Bitcoin', 'Blockchain', 'Mint'],
-};
+  description: 'Mint NFTs on Stacks blockchain',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en">
-      <body>
-        <WalletProvider>
-          <ToastProvider>
-            {children}
-          </ToastProvider>
-        </WalletProvider>
-      </body>
+      <body>{children}</body>
     </html>
-  );
+  )
 }
