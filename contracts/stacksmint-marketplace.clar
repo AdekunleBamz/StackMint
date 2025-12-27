@@ -10,3 +10,10 @@
     (try! (contract-call? .stacksmint-treasury collect-fee))
     (map-set listings token-id { price: price, seller: tx-sender })
     (ok true)))
+
+(define-public (buy-nft (token-id uint))
+  (let ((listing (unwrap! (map-get? listings token-id) ERR_NOT_LISTED)))
+    (try! (stx-transfer? (get price listing) tx-sender (get seller listing)))
+    (try! (contract-call? .stacksmint-nft transfer token-id (get seller listing) tx-sender))
+    (map-delete listings token-id)
+    (ok true)))
