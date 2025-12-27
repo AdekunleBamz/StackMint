@@ -18,3 +18,17 @@
     (map-set token-uris token-id uri)
     (var-set last-token-id token-id)
     (ok token-id)))
+
+(define-public (transfer (token-id uint) (sender principal) (recipient principal))
+  (begin
+    (asserts! (is-eq tx-sender sender) ERR_NOT_OWNER)
+    (nft-transfer? stacksmint-nft token-id sender recipient)))
+
+(define-read-only (get-last-token-id)
+  (ok (var-get last-token-id)))
+
+(define-read-only (get-token-uri (token-id uint))
+  (ok (map-get? token-uris token-id)))
+
+(define-read-only (get-owner (token-id uint))
+  (ok (nft-get-owner? stacksmint-nft token-id)))
