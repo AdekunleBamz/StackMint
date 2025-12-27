@@ -11,20 +11,3 @@
   creator: principal,
   max-supply: uint
 })
-
-(define-public (create-collection (name (string-ascii 64)) (max-supply uint))
-  (let ((collection-id (+ (var-get collection-counter) u1)))
-    (try! (contract-call? .stacksmint-treasury collect-fee))
-    (map-set collections collection-id {
-      name: name,
-      creator: tx-sender,
-      max-supply: max-supply
-    })
-    (var-set collection-counter collection-id)
-    (ok collection-id)))
-
-(define-read-only (get-collection (collection-id uint))
-  (map-get? collections collection-id))
-
-(define-read-only (get-collection-count)
-  (var-get collection-counter))
