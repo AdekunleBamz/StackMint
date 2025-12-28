@@ -42,3 +42,5 @@ wallets.json
 interaction-results*.json
 .env
 settings/
+wallets.json
+interaction-results*.json
