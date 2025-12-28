@@ -47,7 +47,7 @@ export default function CreateCollection() {
           {loading ? 'Creating...' : 'Create Collection'}
         </button>
       ) : (
-        <button onClick={connect} className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold">
+        <button onClick={() => connect()} className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold">
           Connect Wallet
         </button>
       )}

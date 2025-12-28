@@ -21,11 +21,11 @@ export default function FilterTabs({ tabs, onSelect }: FilterTabsProps) {
         <button
           key={tab}
           onClick={() => handleSelect(tab)}
-          className={\`px-4 py-2 rounded-lg text-sm transition-colors \${
+          className={`px-4 py-2 rounded-lg text-sm transition-colors ${
             active === tab 
               ? 'bg-purple-600 text-white' 
               : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
-          }\`}
+          }`}
         >
           {tab}
         </button>

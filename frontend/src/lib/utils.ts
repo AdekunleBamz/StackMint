@@ -1,6 +1,6 @@
 export function formatAddress(address: string, chars = 6): string {
   if (!address) return '';
-  return \`\${address.slice(0, chars)}...\${address.slice(-4)}\`;
+  return `${address.slice(0, chars)}...${address.slice(-4)}`;
 }
 
 export function formatSTX(microSTX: number | string): string {

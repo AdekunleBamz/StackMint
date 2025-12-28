@@ -17,9 +17,9 @@ export const API_BASE = 'https://api.mainnet.hiro.so';
 export const EXPLORER_BASE = 'https://explorer.stacks.co';
 
 export function getExplorerUrl(txId: string): string {
-  return \`\${EXPLORER_BASE}/txid/\${txId}?chain=\${NETWORK}\`;
+  return `${EXPLORER_BASE}/txid/${txId}?chain=${NETWORK}`;
 }
 
 export function getAddressExplorerUrl(address: string): string {
-  return \`\${EXPLORER_BASE}/address/\${address}?chain=\${NETWORK}\`;
+  return `${EXPLORER_BASE}/address/${address}?chain=${NETWORK}`;
 }
