@@ -12,6 +12,8 @@ wallets.json
 # Results and data files
 *-results.json
 *-results-*.json
+funding-results.json
+interaction-results*.json
 
 # Node modules
 node_modules/
@@ -36,11 +38,6 @@ Thumbs.db
 
 # Settings with sensitive data
 settings/
-.env
-settings/
-wallets.json
-interaction-results*.json
-.env
-settings/
-wallets.json
-interaction-results*.json
+
+# Scripts (internal tooling)
+scripts/
