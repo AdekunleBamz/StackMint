@@ -169,6 +169,8 @@ export const UI = {
 // Error Messages
 // ============================================================================
 
+export type ErrorKey = keyof typeof ERRORS;
+
 export const ERRORS = {
   WALLET_NOT_CONNECTED: 'Please connect your wallet to continue',
   INSUFFICIENT_BALANCE: 'Insufficient STX balance',
@@ -177,6 +179,8 @@ export const ERRORS = {
   NETWORK_ERROR: 'Network error. Please check your connection.',
   COLLECTION_NAME_REQUIRED: 'Collection name is required',
   MAX_SUPPLY_REQUIRED: 'Max supply must be greater than 0',
+  SESSION_EXPIRED: 'Session expired. Please reconnect your wallet.',
+  RATE_LIMITED: 'Too many requests. Please try again later.',
 } as const;
 
 // ============================================================================
