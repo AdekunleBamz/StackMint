@@ -2,18 +2,39 @@
 
 /**
  * NFTGrid Component
- * Displays a filterable grid of NFT collections
+ * Displays a filterable grid of NFT collections with animations
  * @module NFTGrid
- * @version 2.1.0
+ * @version 2.2.0
  */
 
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import CollectionCard from './CollectionCard';
 
 // Loading state transition duration
 const FILTER_TRANSITION_MS = 300;
 const GRID_COLUMN_COUNT = 3;
+
+/** Maximum collections to display */
+const MAX_DISPLAY_COUNT = 12;
+
+/** Grid gap in rem units */
+const GRID_GAP = 1.5;
+
+/**
+ * Grid display mode
+ */
+type GridDisplayMode = 'grid' | 'list' | 'compact';
+
+/**
+ * Collection data structure
+ */
+interface CollectionItem {
+  name: string;
+  creator: string;
+  itemCount: number;
+  featured: boolean;
+}
 
 const mockCollections = [
   { name: 'Stacks Punks', creator: 'SP1ABC...', itemCount: 100, featured: true },
