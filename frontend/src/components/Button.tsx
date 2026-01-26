@@ -3,12 +3,37 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import Link from 'next/link';
 
+/**
+ * Button Component
+ * Reusable button with multiple variants, sizes, and states
+ * @module components/Button
+ * @version 2.0.0
+ */
+
+// ============================================================================
+// Constants
+// ============================================================================
+
+/** Default button animation duration in ms */
+const BUTTON_TRANSITION_DURATION = 200;
+
+/** Loading spinner size multiplier */
+const SPINNER_SIZE_RATIO = 0.6;
+
 // ============================================================================
 // Types
 // ============================================================================
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success';
 type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+/**
+ * Button loading state configuration
+ */
+interface LoadingConfig {
+  showSpinner: boolean;
+  loadingText?: string;
+}
 
 interface ButtonBaseProps {
   variant?: ButtonVariant;
