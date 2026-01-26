@@ -1,8 +1,8 @@
 /**
  * Mint Page
- * NFT minting interface with wallet balance display
+ * NFT minting interface with wallet balance display and feature highlights
  * @module MintPage
- * @version 2.1.0
+ * @version 2.2.0
  */
 
 import Header from '@/components/Header';
@@ -14,6 +14,21 @@ import Link from 'next/link';
 // Mint fee configuration
 const MINT_FEE_STX = 0.01;
 const NETWORK_NAME = 'Stacks Mainnet';
+
+/** Maximum mints per transaction */
+const MAX_MINTS_PER_TX = 10;
+
+/** Feature card grid columns */
+const FEATURE_GRID_COLS = 4;
+
+/**
+ * Feature item configuration
+ */
+interface FeatureItem {
+  icon: string;
+  title: string;
+  desc: string;
+}
 
 export default function MintPage() {
   const features = [
