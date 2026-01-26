@@ -1,3 +1,10 @@
+/**
+ * StacksMint Contract Interactions
+ * Functions for interacting with Clarity smart contracts
+ * @module contracts
+ * @version 2.0.0
+ */
+
 import {
   makeContractCall,
   broadcastTransaction,
@@ -24,6 +31,10 @@ import { userSession } from './stacks';
 // ============================================================================
 // Contract Configuration
 // ============================================================================
+
+// Transaction configuration defaults
+const DEFAULT_ANCHOR_MODE = AnchorMode.Any;
+const DEFAULT_POST_CONDITION_MODE = PostConditionMode.Deny;
 
 export const CONTRACT_CONFIG = {
   mainnet: {
