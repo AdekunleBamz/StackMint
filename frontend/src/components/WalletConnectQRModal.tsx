@@ -2,17 +2,36 @@
 
 /**
  * WalletConnectQRModal Component
- * QR code modal for WalletConnect pairing
+ * QR code modal for WalletConnect pairing with countdown timer
  * @module WalletConnectQRModal
- * @version 2.1.0
+ * @version 2.2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 
 // QR code configuration
 const QR_EXPIRATION_SECONDS = 60;
 const COPY_FEEDBACK_DURATION_MS = 2000;
+
+/** QR code size in pixels */
+const QR_SIZE = 256;
+
+/** QR code foreground color */
+const QR_FG_COLOR = '#000000';
+
+/** QR code background color */
+const QR_BG_COLOR = '#ffffff';
+
+/**
+ * Modal tab options
+ */
+type ModalTab = 'qr' | 'mobile';
+
+/**
+ * Connection state for pairing
+ */
+type ConnectionState = 'idle' | 'connecting' | 'connected' | 'expired' | 'error';
 
 interface WalletConnectQRModalProps {
   uri: string;
