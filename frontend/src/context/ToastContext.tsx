@@ -1,10 +1,22 @@
 'use client';
 
+/**
+ * ToastContext
+ * Global context for toast notification management
+ * @module ToastContext
+ * @version 2.1.0
+ */
+
 import { createContext, useContext, useState, ReactNode, useCallback, useMemo } from 'react';
 import Toast from '@/components/Toast';
 
+// Toast positioning and type definitions
 type ToastPosition = 'top-left' | 'top-right' | 'top-center' | 'bottom-left' | 'bottom-right' | 'bottom-center';
 type ToastType = 'success' | 'error' | 'info' | 'warning';
+
+// Animation timing constants
+const TOAST_ENTER_DURATION_MS = 300;
+const TOAST_EXIT_DURATION_MS = 200;
 
 interface ToastItem {
   id: string;
