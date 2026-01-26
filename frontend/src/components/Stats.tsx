@@ -2,17 +2,38 @@
 
 /**
  * Stats Component
- * Animated statistics display with intersection observer
+ * Animated statistics display with intersection observer and counting animation
  * @module Stats
- * @version 2.2.0
+ * @version 2.3.0
  */
 
-import { useEffect, useState, useRef, type RefObject } from 'react';
+import { useEffect, useState, useRef, useCallback, type RefObject } from 'react';
 
 // Stats animation configuration
 const INTERSECTION_THRESHOLD = 0.1;
 const ANIMATION_DURATION = 500;
 const STAT_ITEM_CLASS = 'text-center p-6 bg-gray-900/30 rounded-2xl';
+
+/** Number animation step duration in ms */
+const COUNT_STEP_DURATION = 20;
+
+/** Maximum counting iterations */
+const MAX_COUNT_ITERATIONS = 50;
+
+/**
+ * Stat display format
+ */
+type StatFormat = 'number' | 'currency' | 'percentage';
+
+/**
+ * Single stat configuration
+ */
+interface StatConfig {
+  label: string;
+  value: string;
+  icon: string;
+  format?: StatFormat;
+}
 
 interface StatItemProps {
   value: string;
