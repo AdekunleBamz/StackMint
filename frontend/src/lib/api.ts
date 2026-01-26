@@ -1,9 +1,15 @@
 /**
  * Stacks API Client
  * Provides functions to interact with the Hiro Stacks API
+ * @module api
+ * @version 2.1.0
  */
 
 type NetworkType = 'mainnet' | 'testnet';
+
+// API rate limiting configuration
+const RATE_LIMIT_MS = 100;
+let lastRequestTime = 0;
 
 const API_ENDPOINTS: Record<NetworkType, string> = {
   mainnet: 'https://api.mainnet.hiro.so',
