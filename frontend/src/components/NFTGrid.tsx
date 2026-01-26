@@ -1,8 +1,19 @@
 'use client';
 
+/**
+ * NFTGrid Component
+ * Displays a filterable grid of NFT collections
+ * @module NFTGrid
+ * @version 2.1.0
+ */
+
 import { useState } from 'react';
 import Link from 'next/link';
 import CollectionCard from './CollectionCard';
+
+// Loading state transition duration
+const FILTER_TRANSITION_MS = 300;
+const GRID_COLUMN_COUNT = 3;
 
 const mockCollections = [
   { name: 'Stacks Punks', creator: 'SP1ABC...', itemCount: 100, featured: true },
