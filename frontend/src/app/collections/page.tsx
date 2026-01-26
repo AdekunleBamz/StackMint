@@ -1,10 +1,22 @@
 'use client';
 
+/**
+ * Collections Page
+ * Browse and create NFT collections
+ * @module CollectionsPage
+ * @version 2.1.0
+ */
+
 import { useState } from 'react';
 import Header from '@/components/Header';
 import CreateCollection from '@/components/CreateCollection';
 import NFTGrid from '@/components/NFTGrid';
 import Footer from '@/components/Footer';
+
+// Tab and sort configuration
+type TabType = 'browse' | 'create';
+type SortType = 'volume' | 'floor' | 'items';
+const DEFAULT_SORT: SortType = 'volume';
 
 const featuredCollections = [
   { id: 1, name: 'Bitcoin Punks', items: 10000, floor: 0.5, volume: 1250, image: '/placeholder.png', verified: true },
