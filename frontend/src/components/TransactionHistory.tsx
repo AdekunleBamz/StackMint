@@ -1,8 +1,19 @@
 'use client';
 
+/**
+ * TransactionHistory Component
+ * Displays recent wallet transactions with filtering
+ * @module TransactionHistory
+ * @version 2.1.0
+ */
+
 import { useState, useEffect } from 'react';
 import { useWallet } from '@/hooks/useWallet';
 import { fetchTransactions } from '@/lib/api';
+
+// Display configuration
+const MAX_TRANSACTIONS_DISPLAY = 10;
+const ICON_SIZE_CLASS = 'w-4 h-4';
 
 interface Transaction {
   tx_id: string;
