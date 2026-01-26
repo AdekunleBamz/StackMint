@@ -4,10 +4,31 @@ import Link from 'next/link';
  * Footer Component
  * Site-wide footer with navigation links and social icons
  * @module components/Footer
+ * @version 2.0.0
  */
 
 // Footer component version
 const FOOTER_VERSION = '1.2.0';
+
+/** Icon size for social links */
+const SOCIAL_ICON_SIZE = 'w-5 h-5';
+
+/** Footer column gap */
+const COLUMN_GAP = 'gap-8';
+
+/**
+ * Footer link categories
+ */
+type FooterCategory = 'product' | 'resources' | 'company';
+
+/**
+ * Social link configuration
+ */
+interface SocialLink {
+  label: string;
+  href: string;
+  icon: React.ReactNode;
+}
 
 // Company information
 const COMPANY_INFO = {
