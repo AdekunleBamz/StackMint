@@ -1,8 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useWallet } from '@/hooks/useWallet';
 import { useContract } from '@/hooks/useContract';
+
+// URI validation patterns
+const VALID_URI_PREFIXES = ['ipfs://', 'https://'] as const;
 
 export default function MintCard() {
   const [uri, setUri] = useState('');
@@ -17,7 +20,10 @@ export default function MintCard() {
     setName('');
   };
 
-  const isValidUri = uri.startsWith('ipfs://') || uri.startsWith('https://');
+  const isValidUri = useMemo(() => 
+    VALID_URI_PREFIXES.some(prefix => uri.startsWith(prefix)),
+    [uri]
+  );
 
   return (
     <div className="bg-gradient-to-br from-gray-900/80 to-gray-900/50 border border-purple-500/20 rounded-2xl p-8 max-w-md mx-auto backdrop-blur-sm shadow-xl shadow-purple-500/5 hover:shadow-purple-500/10 transition-shadow duration-500">
