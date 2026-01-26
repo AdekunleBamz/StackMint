@@ -1,11 +1,13 @@
 # StacksMint 💎
 
-A full-stack decentralized NFT minting platform and marketplace built on the Stacks blockchain. Create, collect, and trade NFTs secured by Bitcoin.
+> A full-stack decentralized NFT minting platform and marketplace built on the Stacks blockchain. Create, collect, and trade NFTs secured by Bitcoin.
 
+![Version](https://img.shields.io/badge/version-2.1.0-blue)
 ![Stacks](https://img.shields.io/badge/Stacks-5546FF?style=flat&logo=stacks&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=next.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 ## Overview
 
