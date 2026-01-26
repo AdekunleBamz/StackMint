@@ -1,8 +1,16 @@
 ;; StacksMint Treasury Contract
-;; Handles creator fee collection
+;; Handles creator fee collection and distribution
+;; Version: 1.1.0
+;; Author: StacksMint Team
 
+;; Configuration constants
 (define-constant CONTRACT_OWNER tx-sender)
-(define-constant CREATOR_FEE u10000) ;; 0.01 STX
+(define-constant CREATOR_FEE u10000) ;; 0.01 STX in microSTX
+(define-constant MARKETPLACE_FEE_PERCENT u25) ;; 2.5% marketplace fee
+
+;; Error constants
+(define-constant ERR_INSUFFICIENT_BALANCE (err u200))
+(define-constant ERR_UNAUTHORIZED (err u201))
 
 (define-data-var total-fees-collected uint u0)
 

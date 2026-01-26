@@ -1,7 +1,15 @@
 ;; StacksMint Marketplace Contract
+;; Decentralized NFT trading platform
+;; Version: 1.1.0
+;; Author: StacksMint Team
+
+;; Error constants
 (define-constant CONTRACT_OWNER tx-sender)
 (define-constant ERR_NOT_OWNER (err u100))
+(define-constant ERR_ALREADY_LISTED (err u101))
 (define-constant ERR_NOT_LISTED (err u102))
+(define-constant ERR_INVALID_PRICE (err u103))
+(define-constant ERR_SELLER_ONLY (err u104))
 
 (define-map listings uint { price: uint, seller: principal })
 
