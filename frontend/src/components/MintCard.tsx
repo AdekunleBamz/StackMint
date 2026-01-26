@@ -2,12 +2,12 @@
 
 /**
  * MintCard Component
- * NFT minting form with URI validation
+ * NFT minting form with URI validation and status feedback
  * @module MintCard
- * @version 2.2.0
+ * @version 2.3.0
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useWallet } from '@/hooks/useWallet';
 import { useContract } from '@/hooks/useContract';
 
@@ -18,6 +18,25 @@ type ValidUriPrefix = typeof VALID_URI_PREFIXES[number];
 // Input placeholder texts
 const NAME_PLACEHOLDER = 'My Awesome NFT';
 const URI_PLACEHOLDER = 'ipfs://... or https://...';
+
+/** Maximum NFT name length */
+const MAX_NAME_LENGTH = 64;
+
+/** Maximum URI length */
+const MAX_URI_LENGTH = 256;
+
+/**
+ * Minting status for UI feedback
+ */
+type MintStatus = 'idle' | 'validating' | 'minting' | 'success' | 'error';
+
+/**
+ * Mint form validation result
+ */
+interface ValidationResult {
+  isValid: boolean;
+  errors: string[];
+}
 
 export default function MintCard() {
   const [uri, setUri] = useState('');
