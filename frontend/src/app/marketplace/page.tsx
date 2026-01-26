@@ -1,9 +1,20 @@
 'use client';
 
+/**
+ * Marketplace Page
+ * NFT marketplace with filtering and sorting
+ * @module MarketplacePage
+ * @version 2.1.0
+ */
+
 import { useState } from 'react';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+
+// Price range configuration
+const DEFAULT_MIN_PRICE = 0;
+const DEFAULT_MAX_PRICE = 1000;
 
 const mockListings = [
   { id: 1, name: 'Stacks Punk #42', price: 100, seller: 'SP1ABC...XYZ', image: null, collection: 'Stacks Punks', rarity: 'Rare' },
