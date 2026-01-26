@@ -1,10 +1,18 @@
 'use client';
 
+/**
+ * Stats Component
+ * Animated statistics display with intersection observer
+ * @module Stats
+ * @version 2.2.0
+ */
+
 import { useEffect, useState, useRef, type RefObject } from 'react';
 
 // Stats animation configuration
 const INTERSECTION_THRESHOLD = 0.1;
 const ANIMATION_DURATION = 500;
+const STAT_ITEM_CLASS = 'text-center p-6 bg-gray-900/30 rounded-2xl';
 
 interface StatItemProps {
   value: string;
