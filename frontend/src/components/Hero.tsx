@@ -1,5 +1,20 @@
 import Link from 'next/link';
 
+/**
+ * Hero Component
+ * Main landing section with CTA and animated background
+ * @module components/Hero
+ */
+
+// Animation configuration
+const ANIMATION_DELAYS = {
+  tagline: 0,
+  title: 100,
+  description: 200,
+  buttons: 300,
+  trust: 400,
+} as const;
+
 // Hero section content configuration
 const HERO_CONTENT = {
   tagline: 'Live on Stacks Mainnet',
