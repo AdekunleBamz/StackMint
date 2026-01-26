@@ -81,7 +81,9 @@ export function useWallet(): UseWalletReturn {
   // Format short address
   const shortAddress = useMemo(() => {
     if (!context.address) return null;
-    return `${context.address.slice(0, 6)}...${context.address.slice(-4)}`;
+    const PREFIX_LENGTH = 6;
+    const SUFFIX_LENGTH = 4;
+    return `${context.address.slice(0, PREFIX_LENGTH)}...${context.address.slice(-SUFFIX_LENGTH)}`;
   }, [context.address]);
   
   // Generate explorer URL
