@@ -34,10 +34,10 @@ export default function Header() {
   };
 
   const navLinks = [
-    { href: '/mint', label: 'Mint', icon: '✨' },
-    { href: '/collections', label: 'Collections', icon: '📦' },
-    { href: '/marketplace', label: 'Marketplace', icon: '🏪' },
-    { href: '/profile', label: 'Profile', icon: '👤' },
+    { href: '/mint', label: 'Mint', icon: '✨', ariaLabel: 'Go to NFT minting page' },
+    { href: '/collections', label: 'Collections', icon: '📦', ariaLabel: 'Browse NFT collections' },
+    { href: '/marketplace', label: 'Marketplace', icon: '🏪', ariaLabel: 'Visit the NFT marketplace' },
+    { href: '/profile', label: 'Profile', icon: '👤', ariaLabel: 'View your profile' },
   ];
 
   const isActive = (href: string) => pathname === href;
