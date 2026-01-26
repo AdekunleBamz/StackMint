@@ -4,12 +4,16 @@ import { Inter, Space_Grotesk } from 'next/font/google';
 import { WalletProvider } from '@/context/WalletContext';
 import { ToastProvider } from '@/context/ToastContext';
 
+// Application version
+const APP_VERSION = '1.0.0';
+
 // Font configurations with optimal loading
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
   preload: true,
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 const spaceGrotesk = Space_Grotesk({
@@ -17,6 +21,7 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
   variable: '--font-space-grotesk',
   preload: true,
+  fallback: ['system-ui', 'sans-serif'],
 });
 
 // Enhanced metadata with comprehensive SEO
