@@ -162,12 +162,16 @@ export function getRelativeTime(timestamp: number): string {
 // Text Formatting
 // ============================================================================
 
+// Truncation configuration
+const DEFAULT_TRUNCATE_SUFFIX = '...';
+const DEFAULT_MAX_WORDS = 20;
+
 /**
  * Truncate text with ellipsis
  */
-export function truncateText(text: string, maxLength: number): string {
+export function truncateText(text: string, maxLength: number, suffix = DEFAULT_TRUNCATE_SUFFIX): string {
   if (!text || text.length <= maxLength) return text;
-  return text.slice(0, maxLength).trim() + '...';
+  return text.slice(0, maxLength).trim() + suffix;
 }
 
 /**
