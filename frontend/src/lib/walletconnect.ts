@@ -1,3 +1,10 @@
+/**
+ * WalletConnect Integration
+ * Provides WalletConnect v2 support for Stacks wallets
+ * @module walletconnect
+ * @version 2.0.0
+ */
+
 import UniversalProvider from '@walletconnect/universal-provider';
 
 // ============================================================================
@@ -5,6 +12,10 @@ import UniversalProvider from '@walletconnect/universal-provider';
 // ============================================================================
 
 const PROJECT_ID = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '';
+
+// Session timeout configuration
+const SESSION_TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes
+const CONNECTION_TIMEOUT_MS = 30 * 1000; // 30 seconds
 
 // Stacks chain IDs in CAIP-2 format
 export const STACKS_CHAINS = {
