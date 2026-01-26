@@ -7,12 +7,18 @@ import Image from 'next/image';
  * NFTCard Component
  * Displays an NFT with image, price, and owner information
  * @module components/NFTCard
+ * @version 2.2.0
  */
 
 // Default placeholder for NFT images
 const DEFAULT_PLACEHOLDER = '🎨';
 const ADDRESS_DISPLAY_LENGTH = 12;
 const PRICE_DECIMALS = 2;
+
+// Animation configuration
+const HOVER_SCALE_CLASS = 'scale-110';
+const DEFAULT_SCALE_CLASS = 'scale-100';
+const TRANSITION_DURATION_CLASS = 'duration-500';
 
 interface NFTCardProps {
   id: number;
