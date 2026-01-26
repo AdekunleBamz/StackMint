@@ -1,8 +1,19 @@
 'use client';
 
+/**
+ * MobileMenu Component
+ * Responsive mobile navigation menu
+ * @module MobileMenu
+ * @version 2.1.0
+ */
+
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
+// Icon size configuration
+const ICON_SIZE_CLASS = 'w-5 h-5';
+const STROKE_WIDTH = 2;
 
 const navLinks = [
   { href: '/mint', label: 'Mint', icon: (
