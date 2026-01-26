@@ -2,6 +2,26 @@
 
 import { type ReactNode, type HTMLAttributes, forwardRef, useState } from 'react';
 
+/**
+ * Avatar Component
+ * Display user profile images with fallback and status indicators
+ * @module components/Avatar
+ * @version 2.0.0
+ */
+
+// ============================================================================
+// Constants
+// ============================================================================
+
+/** Maximum avatars to show in a group before "+N" indicator */
+const DEFAULT_GROUP_MAX = 5;
+
+/** Status indicator pulse animation duration */
+const STATUS_PULSE_DURATION = 2000;
+
+/** Overlap amount for avatar group in pixels */
+const GROUP_OVERLAP = -8;
+
 // ============================================================================
 // Types
 // ============================================================================
@@ -9,6 +29,11 @@ import { type ReactNode, type HTMLAttributes, forwardRef, useState } from 'react
 type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 type AvatarShape = 'circle' | 'square' | 'rounded';
 type AvatarStatus = 'online' | 'offline' | 'away' | 'busy' | 'none';
+
+/**
+ * Avatar loading state
+ */
+type AvatarLoadingState = 'idle' | 'loading' | 'loaded' | 'error';
 
 interface AvatarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   src?: string;

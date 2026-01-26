@@ -10,6 +10,30 @@ import {
   type KeyboardEvent,
 } from 'react';
 
+/**
+ * Tabs Component
+ * Accessible tabbed interface with keyboard navigation
+ * @module components/Tabs
+ * @version 2.0.0
+ */
+
+// ============================================================================
+// Constants
+// ============================================================================
+
+/** Tab panel transition duration */
+const PANEL_TRANSITION_DURATION = 200;
+
+/** Keyboard navigation keys */
+const TAB_KEYS = {
+  ARROW_LEFT: 'ArrowLeft',
+  ARROW_RIGHT: 'ArrowRight',
+  ARROW_UP: 'ArrowUp',
+  ARROW_DOWN: 'ArrowDown',
+  HOME: 'Home',
+  END: 'End',
+} as const;
+
 // ============================================================================
 // Types
 // ============================================================================
@@ -17,6 +41,11 @@ import {
 type TabsVariant = 'default' | 'pills' | 'underline' | 'enclosed';
 type TabsSize = 'sm' | 'md' | 'lg';
 type TabsOrientation = 'horizontal' | 'vertical';
+
+/**
+ * Tab activation mode
+ */
+type TabActivation = 'automatic' | 'manual';
 
 interface TabsContextValue {
   activeTab: string;
