@@ -2,8 +2,16 @@
  * StacksMint Constants
  * Centralized configuration for the application
  * @module constants
- * @version 2.0.0
+ * @version 2.1.0
  */
+
+// ============================================================================
+// Application Metadata
+// ============================================================================
+
+export const APP_NAME = 'StacksMint';
+export const APP_VERSION = '2.1.0';
+export const APP_DESCRIPTION = 'Decentralized NFT minting platform on Stacks blockchain';
 
 // ============================================================================
 // Contract Configuration
