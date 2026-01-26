@@ -2,18 +2,38 @@
 
 /**
  * MobileMenu Component
- * Responsive mobile navigation menu
+ * Responsive mobile navigation menu with animations
  * @module MobileMenu
- * @version 2.1.0
+ * @version 2.2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 // Icon size configuration
 const ICON_SIZE_CLASS = 'w-5 h-5';
 const STROKE_WIDTH = 2;
+
+/** Menu slide animation duration */
+const MENU_ANIMATION_DURATION = 300;
+
+/** Menu backdrop opacity */
+const BACKDROP_OPACITY = 0.5;
+
+/**
+ * Menu state for animations
+ */
+type MenuState = 'closed' | 'opening' | 'open' | 'closing';
+
+/**
+ * Navigation link configuration
+ */
+interface NavLink {
+  href: string;
+  label: string;
+  icon: React.ReactNode;
+}
 
 const navLinks = [
   { href: '/mint', label: 'Mint', icon: (
