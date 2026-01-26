@@ -1,8 +1,8 @@
 /**
  * Features Component
- * Displays the main features of StacksMint
+ * Displays the main features of StacksMint with animations
  * @module Features
- * @version 2.1.0
+ * @version 2.2.0
  */
 
 import FeatureCard from './FeatureCard';
@@ -10,6 +10,25 @@ import FeatureCard from './FeatureCard';
 // Section configuration
 const SECTION_TITLE = 'Why StacksMint?';
 const SECTION_SUBTITLE = 'The easiest way to create and trade NFTs on Bitcoin';
+
+/** Grid columns per breakpoint */
+const GRID_COLS = {
+  sm: 1,
+  md: 2,
+  lg: 4,
+} as const;
+
+/** Animation stagger delay in ms */
+const STAGGER_DELAY = 100;
+
+/**
+ * Feature data structure
+ */
+interface FeatureData {
+  icon: string;
+  title: string;
+  description: string;
+}
 
 const features = [
   { icon: '🎨', title: 'Easy Minting', description: 'Mint NFTs in seconds with just a few clicks' },
