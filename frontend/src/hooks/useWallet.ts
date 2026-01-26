@@ -1,9 +1,23 @@
 'use client';
 
+/**
+ * useWallet Hook
+ * Provides wallet connection and management functionality
+ * @module useWallet
+ * @version 2.1.0
+ */
+
 import { useMemo, useCallback } from 'react';
 import { useWalletContext } from '@/context/WalletContext';
 
+// Wallet type definitions
 type WalletType = 'stacks' | 'walletconnect' | null;
+type NetworkType = 'mainnet' | 'testnet' | 'devnet';
+
+// Status constants
+const STATUS_CONNECTED = 'connected';
+const STATUS_CONNECTING = 'connecting';
+const STATUS_DISCONNECTED = 'disconnected';
 
 interface UseWalletReturn {
   // Connection state
