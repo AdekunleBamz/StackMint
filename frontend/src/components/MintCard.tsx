@@ -1,11 +1,23 @@
 'use client';
 
+/**
+ * MintCard Component
+ * NFT minting form with URI validation
+ * @module MintCard
+ * @version 2.2.0
+ */
+
 import { useState, useMemo } from 'react';
 import { useWallet } from '@/hooks/useWallet';
 import { useContract } from '@/hooks/useContract';
 
 // URI validation patterns
 const VALID_URI_PREFIXES = ['ipfs://', 'https://'] as const;
+type ValidUriPrefix = typeof VALID_URI_PREFIXES[number];
+
+// Input placeholder texts
+const NAME_PLACEHOLDER = 'My Awesome NFT';
+const URI_PLACEHOLDER = 'ipfs://... or https://...';
 
 export default function MintCard() {
   const [uri, setUri] = useState('');
