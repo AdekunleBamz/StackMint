@@ -1,5 +1,18 @@
 import Link from 'next/link';
 
+// Hero section content configuration
+const HERO_CONTENT = {
+  tagline: 'Live on Stacks Mainnet',
+  title: {
+    main: 'Mint Your',
+    highlight: 'NFTs',
+    sub: 'on Bitcoin',
+  },
+  description: 'Create, collect, and trade unique digital assets secured by the Bitcoin blockchain through Stacks',
+  primaryCTA: { label: 'Start Minting', href: '/mint' },
+  secondaryCTA: { label: 'Explore Collection', href: '/marketplace' },
+};
+
 export default function Hero() {
   return (
     <section className="pt-32 pb-24 px-4 relative overflow-hidden">
