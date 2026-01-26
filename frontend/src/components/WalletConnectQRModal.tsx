@@ -1,7 +1,18 @@
 'use client';
 
+/**
+ * WalletConnectQRModal Component
+ * QR code modal for WalletConnect pairing
+ * @module WalletConnectQRModal
+ * @version 2.1.0
+ */
+
 import { useState, useEffect } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
+
+// QR code configuration
+const QR_EXPIRATION_SECONDS = 60;
+const COPY_FEEDBACK_DURATION_MS = 2000;
 
 interface WalletConnectQRModalProps {
   uri: string;
