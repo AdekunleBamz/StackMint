@@ -1,19 +1,30 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback, memo } from 'react';
+
+/**
+ * FilterTabs Component
+ * Horizontal tab navigation with multiple style variants
+ * @module components/FilterTabs
+ */
+
+// Tab variant types
+type TabVariant = 'default' | 'pills' | 'underline';
 
 interface Tab {
   id: string;
   label: string;
   icon?: string;
   count?: number;
+  disabled?: boolean;
 }
 
 interface FilterTabsProps {
   tabs: Tab[] | string[];
   onSelect: (tabId: string) => void;
   defaultTab?: string;
-  variant?: 'default' | 'pills' | 'underline';
+  variant?: TabVariant;
+  ariaLabel?: string;
 }
 
 export default function FilterTabs({ 
