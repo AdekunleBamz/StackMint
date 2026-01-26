@@ -2,19 +2,24 @@
  * Stacks API Client
  * Provides functions to interact with the Hiro Stacks API
  * @module api
- * @version 2.1.0
+ * @version 2.2.0
  */
 
 type NetworkType = 'mainnet' | 'testnet';
 
 // API rate limiting configuration
 const RATE_LIMIT_MS = 100;
+const MAX_RETRIES = 3;
+const RETRY_DELAY_MS = 1000;
 let lastRequestTime = 0;
 
 const API_ENDPOINTS: Record<NetworkType, string> = {
   mainnet: 'https://api.mainnet.hiro.so',
   testnet: 'https://api.testnet.hiro.so',
 };
+
+// Request timeout configuration
+const DEFAULT_TIMEOUT_MS = 30000;
 
 // Default to mainnet, can be configured
 let currentNetwork: NetworkType = 'mainnet';
