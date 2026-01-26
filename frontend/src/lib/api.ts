@@ -45,6 +45,16 @@ function getApiBase(): string {
   return API_ENDPOINTS[currentNetwork];
 }
 
+// HTTP status codes for reference
+const HTTP_STATUS = {
+  OK: 200,
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  NOT_FOUND: 404,
+  RATE_LIMITED: 429,
+  SERVER_ERROR: 500,
+} as const;
+
 /**
  * Generic fetch wrapper with error handling and retry logic
  */
