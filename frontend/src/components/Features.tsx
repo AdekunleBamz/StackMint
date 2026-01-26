@@ -1,4 +1,15 @@
+/**
+ * Features Component
+ * Displays the main features of StacksMint
+ * @module Features
+ * @version 2.1.0
+ */
+
 import FeatureCard from './FeatureCard';
+
+// Section configuration
+const SECTION_TITLE = 'Why StacksMint?';
+const SECTION_SUBTITLE = 'The easiest way to create and trade NFTs on Bitcoin';
 
 const features = [
   { icon: '🎨', title: 'Easy Minting', description: 'Mint NFTs in seconds with just a few clicks' },
