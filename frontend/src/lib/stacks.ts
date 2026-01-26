@@ -54,6 +54,9 @@ export function isMainnet(): boolean {
 // Types
 // ============================================================================
 
+// Connection status type
+export type ConnectionStatus = 'disconnected' | 'connecting' | 'connected' | 'error';
+
 export interface WalletConnectionOptions {
   onSuccess?: (data: FinishedAuthData) => void;
   onCancel?: () => void;
@@ -73,6 +76,10 @@ export interface STXTransferParams {
   onError?: (error: Error) => void;
   onCancel?: () => void;
 }
+
+// Transfer memo configuration
+const MAX_MEMO_LENGTH = 34;
+const DEFAULT_MEMO = '';
 
 export interface UserProfile {
   stxAddress: {
