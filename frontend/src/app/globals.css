@@ -119,6 +119,14 @@ body {
 .stagger-3 { animation-delay: 0.3s; }
 .stagger-4 { animation-delay: 0.4s; }
 .stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+.stagger-7 { animation-delay: 0.7s; }
+
+/* Focus states for accessibility */
+:focus-visible {
+  outline: 2px solid var(--stacks-purple);
+  outline-offset: 2px;
+}
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
