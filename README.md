@@ -58,8 +58,8 @@ StacksMint is a complete NFT platform that enables users to mint NFTs, create co
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/stacksmint.git
-cd stacksmint
+git clone https://github.com/AdekunleBamz/StackMint.git
+cd StackMint
 
 # Install frontend dependencies
 cd frontend
