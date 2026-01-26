@@ -1,8 +1,19 @@
+/**
+ * Mint Page
+ * NFT minting interface with wallet balance display
+ * @module MintPage
+ * @version 2.1.0
+ */
+
 import Header from '@/components/Header';
 import MintCard from '@/components/MintCard';
 import WalletBalance from '@/components/WalletBalance';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+
+// Mint fee configuration
+const MINT_FEE_STX = 0.01;
+const NETWORK_NAME = 'Stacks Mainnet';
 
 export default function MintPage() {
   const features = [
