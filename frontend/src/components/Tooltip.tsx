@@ -10,12 +10,40 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 
+/**
+ * Tooltip Component
+ * Accessible tooltip with multiple placements and triggers
+ * @module components/Tooltip
+ * @version 2.0.0
+ */
+
+// ============================================================================
+// Constants
+// ============================================================================
+
+/** Default hover delay before showing tooltip */
+const DEFAULT_DELAY = 200;
+
+/** Default offset from trigger element */
+const DEFAULT_OFFSET = 8;
+
+/** Arrow size in pixels */
+const ARROW_SIZE = 6;
+
+/** Z-index for tooltip layer */
+const TOOLTIP_Z_INDEX = 9999;
+
 // ============================================================================
 // Types
 // ============================================================================
 
 type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
 type TooltipTrigger = 'hover' | 'click' | 'focus';
+
+/**
+ * Tooltip visibility state
+ */
+type TooltipVisibility = 'hidden' | 'showing' | 'visible' | 'hiding';
 
 interface TooltipProps {
   children: ReactNode;
