@@ -1,11 +1,18 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, memo } from 'react';
 import Image from 'next/image';
+
+/**
+ * NFTCard Component
+ * Displays an NFT with image, price, and owner information
+ * @module components/NFTCard
+ */
 
 // Default placeholder for NFT images
 const DEFAULT_PLACEHOLDER = '🎨';
 const ADDRESS_DISPLAY_LENGTH = 12;
+const PRICE_DECIMALS = 2;
 
 interface NFTCardProps {
   id: number;
