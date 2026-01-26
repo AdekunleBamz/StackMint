@@ -59,6 +59,10 @@ const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 const TOAST_LIMIT = 5;
 const DEFAULT_DURATION = 4000;
+const DEFAULT_POSITION: ToastPosition = 'bottom-right';
+
+// Toast ID generation prefix
+const TOAST_ID_PREFIX = 'toast';
 
 interface ToastProviderProps {
   children: ReactNode;
@@ -68,7 +72,7 @@ interface ToastProviderProps {
 
 export function ToastProvider({ 
   children, 
-  position = 'bottom-right',
+  position = DEFAULT_POSITION,
   limit = TOAST_LIMIT 
 }: ToastProviderProps) {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
