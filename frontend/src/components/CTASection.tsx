@@ -1,9 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 
-export default function CTASection() {
+// CTA content configuration
+const CTA_CONFIG = {
+  animationThreshold: 0.2,
+  transitionDuration: 700,
+};
+
+function CTASectionComponent() {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
