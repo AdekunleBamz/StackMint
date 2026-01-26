@@ -1,7 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Image from 'next/image';
+
+// Default placeholder for NFT images
+const DEFAULT_PLACEHOLDER = '🎨';
+const ADDRESS_DISPLAY_LENGTH = 12;
 
 interface NFTCardProps {
   id: number;
@@ -17,10 +21,10 @@ export default function NFTCard({ id, name, image, price, owner, onBuy, isLoadin
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   
-  const formatAddress = (addr: string) => {
-    if (addr.length <= 12) return addr;
+  const formatAddress = useCallback((addr: string) => {
+    if (addr.length <= ADDRESS_DISPLAY_LENGTH) return addr;
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
-  };
+  }, []);
 
   return (
     <div 
