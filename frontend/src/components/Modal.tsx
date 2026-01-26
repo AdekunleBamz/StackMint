@@ -9,11 +9,36 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 
+/**
+ * Modal Component
+ * Accessible dialog modal with focus trap and keyboard navigation
+ * @module components/Modal
+ * @version 2.0.0
+ */
+
+// ============================================================================
+// Constants
+// ============================================================================
+
+/** Overlay backdrop blur amount */
+const OVERLAY_BLUR = 'backdrop-blur-sm';
+
+/** Modal animation duration in ms */
+const MODAL_ANIMATION_DURATION = 200;
+
+/** Z-index for modal overlay */
+const MODAL_Z_INDEX = 50;
+
 // ============================================================================
 // Types
 // ============================================================================
 
 type ModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
+
+/**
+ * Modal transition state for animations
+ */
+type ModalTransitionState = 'entering' | 'entered' | 'exiting' | 'exited';
 
 interface ModalProps {
   isOpen: boolean;
