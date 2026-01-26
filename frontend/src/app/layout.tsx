@@ -4,8 +4,26 @@ import { Inter, Space_Grotesk } from 'next/font/google';
 import { WalletProvider } from '@/context/WalletContext';
 import { ToastProvider } from '@/context/ToastContext';
 
+/**
+ * Root Layout
+ * Application shell with providers and font configuration
+ * @module RootLayout
+ * @version 2.0.0
+ */
+
 // Application version
 const APP_VERSION = '1.0.0';
+
+/** Application name for metadata */
+const APP_NAME = 'StacksMint';
+
+/** Default locale for internationalization */
+const DEFAULT_LOCALE = 'en-US';
+
+/**
+ * Theme mode options
+ */
+type ThemeMode = 'light' | 'dark' | 'system';
 
 // Font configurations with optimal loading
 const inter = Inter({
