@@ -1,11 +1,20 @@
 {
   "name": "stacksmint-frontend",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "private": true,
+  "description": "Decentralized NFT minting platform on Stacks blockchain",
+  "author": "StacksMint Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AdekunleBamz/StackMint"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@stacks/connect": "^7.7.0",
