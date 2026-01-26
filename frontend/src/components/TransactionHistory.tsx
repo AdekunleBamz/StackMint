@@ -2,18 +2,34 @@
 
 /**
  * TransactionHistory Component
- * Displays recent wallet transactions with filtering
+ * Displays recent wallet transactions with filtering and pagination
  * @module TransactionHistory
- * @version 2.1.0
+ * @version 2.2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useWallet } from '@/hooks/useWallet';
 import { fetchTransactions } from '@/lib/api';
 
 // Display configuration
 const MAX_TRANSACTIONS_DISPLAY = 10;
 const ICON_SIZE_CLASS = 'w-4 h-4';
+
+/** Transactions per page */
+const PAGE_SIZE = 10;
+
+/** Auto-refresh interval in milliseconds */
+const REFRESH_INTERVAL = 60000;
+
+/**
+ * Transaction filter options
+ */
+type TransactionFilter = 'all' | 'success' | 'pending' | 'failed';
+
+/**
+ * Sort direction for transaction list
+ */
+type SortDirection = 'asc' | 'desc';
 
 interface Transaction {
   tx_id: string;
