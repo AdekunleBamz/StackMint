@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Stats from '@/components/Stats';
@@ -8,13 +8,23 @@ import NFTGrid from '@/components/NFTGrid';
 import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
 
+/**
+ * Home Page
+ * Main landing page for StacksMint platform
+ * @module pages/Home
+ */
+
+// Skeleton item count constants
+const STATS_SKELETON_COUNT = 4;
+const NFT_GRID_SKELETON_COUNT = 8;
+
 // Loading skeletons for each section
 function StatsSkeleton() {
   return (
     <div className="py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[...Array(4)].map((_, i) => (
+          {[...Array(STATS_SKELETON_COUNT)].map((_, i) => (
             <div key={i} className="bg-gray-800/50 rounded-2xl p-6 animate-pulse">
               <div className="h-4 w-16 bg-gray-700 rounded mb-2" />
               <div className="h-8 w-24 bg-gray-700 rounded" />
@@ -32,7 +42,7 @@ function NFTGridSkeleton() {
       <div className="max-w-6xl mx-auto">
         <div className="h-8 w-48 bg-gray-700 rounded mb-8 mx-auto" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[...Array(8)].map((_, i) => (
+          {[...Array(NFT_GRID_SKELETON_COUNT)].map((_, i) => (
             <div key={i} className="bg-gray-800/50 rounded-2xl overflow-hidden animate-pulse">
               <div className="aspect-square bg-gray-700" />
               <div className="p-4 space-y-3">
