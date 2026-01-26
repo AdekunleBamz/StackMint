@@ -45,6 +45,8 @@ interface WalletContextType {
   // Computed
   shortAddress: string | null;
   explorerUrl: string | null;
+  isMainnet: boolean;
+  isTestnet: boolean;
   
   // Actions
   connect: (type?: WalletType) => void;
