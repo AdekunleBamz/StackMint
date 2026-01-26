@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, memo } from 'react';
 
 interface FeatureCardProps {
   icon: string;
@@ -9,7 +9,10 @@ interface FeatureCardProps {
   delay?: number;
 }
 
-export default function FeatureCard({ icon, title, description, delay = 0 }: FeatureCardProps) {
+// Intersection observer threshold
+const VISIBILITY_THRESHOLD = 0.1;
+
+function FeatureCardComponent({ icon, title, description, delay = 0 }: FeatureCardProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -58,3 +61,9 @@ export default function FeatureCard({ icon, title, description, delay = 0 }: Fea
     </div>
   );
 }
+
+// Memoize component to prevent unnecessary re-renders
+const FeatureCard = memo(FeatureCardComponent);
+FeatureCard.displayName = 'FeatureCard';
+
+export default FeatureCard;
