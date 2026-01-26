@@ -319,6 +319,10 @@ export function clamp(num: number, min: number, max: number): number {
 // Async Utilities
 // ============================================================================
 
+// Default debounce delay
+const DEFAULT_DEBOUNCE_MS = 300;
+const DEFAULT_THROTTLE_MS = 100;
+
 /**
  * Sleep for a specified number of milliseconds
  */
@@ -328,10 +332,12 @@ export function sleep(ms: number): Promise<void> {
 
 /**
  * Debounce a function
+ * @param fn - Function to debounce
+ * @param delay - Delay in milliseconds (default: 300ms)
  */
 export function debounce<T extends (...args: unknown[]) => unknown>(
   fn: T,
-  delay: number
+  delay: number = DEFAULT_DEBOUNCE_MS
 ): (...args: Parameters<T>) => void {
   let timeoutId: NodeJS.Timeout;
   return (...args: Parameters<T>) => {
