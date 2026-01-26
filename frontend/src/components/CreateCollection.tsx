@@ -1,8 +1,20 @@
 'use client';
 
+/**
+ * CreateCollection Component
+ * Multi-step form for creating NFT collections
+ * @module CreateCollection
+ * @version 2.1.0
+ */
+
 import { useState } from 'react';
 import { useWallet } from '@/hooks/useWallet';
 import { useContract } from '@/hooks/useContract';
+
+// Form configuration
+const DEFAULT_ROYALTY_PERCENT = '5';
+const MIN_NAME_LENGTH = 1;
+const MIN_SYMBOL_LENGTH = 1;
 
 const steps = ['Details', 'Settings', 'Review'];
 
