@@ -99,6 +99,15 @@ export interface TransferNFTParams {
 }
 
 export interface BuyNFTParams {
+  listingId: number;
+  price: number; // in microSTX
+}
+
+export interface CancelListingParams {
+  listingId: number;
+}
+
+export interface BuyNFTParams {
   tokenId: number;
   price: number; // in microSTX
   seller: string;
