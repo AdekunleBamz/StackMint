@@ -7,6 +7,7 @@ import Link from 'next/link';
  * CollectionCard Component
  * Displays a collection with image, stats, and verification status
  * @module components/CollectionCard
+ * @version 2.2.0
  */
 
 // Gradient presets for collection backgrounds
@@ -17,6 +18,12 @@ const GRADIENT_PRESETS = [
   'from-orange-600 to-red-600',
   'from-green-600 to-teal-600',
 ] as const;
+
+type GradientPreset = typeof GRADIENT_PRESETS[number];
+
+// Card animation timing
+const HOVER_TRANSITION_DURATION = 'duration-300';
+const IMAGE_SCALE_AMOUNT = 1.05;
 
 interface CollectionCardProps {
   name: string;
