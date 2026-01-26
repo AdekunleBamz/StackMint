@@ -1,10 +1,23 @@
 'use client';
 
+/**
+ * Header Component
+ * Main navigation header with wallet connection
+ * @module Header
+ * @version 2.1.0
+ */
+
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useWallet } from '@/hooks/useWallet';
 import WalletConnectQRModal from './WalletConnectQRModal';
+
+// Scroll detection threshold
+const SCROLL_THRESHOLD = 20;
+
+// Wallet connection types
+type WalletConnectionType = 'stacks' | 'walletconnect';
 
 export default function Header() {
   const { address, connect, connectWalletConnect, disconnect, isConnected, connecting, wcUri, showQRModal, closeQRModal } = useWallet();
