@@ -1,7 +1,12 @@
 /**
  * StacksMint Utility Functions
  * Common helper functions used throughout the application
+ * @module utils
+ * @version 2.0.0
  */
+
+// Type definitions for utility functions
+export type NetworkType = 'mainnet' | 'testnet';
 
 // ============================================================================
 // Address Formatting
