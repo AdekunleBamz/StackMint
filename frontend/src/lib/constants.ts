@@ -187,10 +187,14 @@ export const ERRORS = {
 // Success Messages
 // ============================================================================
 
+export type SuccessKey = keyof typeof SUCCESS;
+
 export const SUCCESS = {
   NFT_MINTED: 'NFT minted successfully!',
   COLLECTION_CREATED: 'Collection created successfully!',
   NFT_LISTED: 'NFT listed for sale successfully!',
   NFT_PURCHASED: 'NFT purchased successfully!',
   WALLET_CONNECTED: 'Wallet connected successfully!',
+  WALLET_DISCONNECTED: 'Wallet disconnected successfully!',
+  ADDRESS_COPIED: 'Address copied to clipboard!',
 } as const;
