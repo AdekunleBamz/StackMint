@@ -1,10 +1,22 @@
 'use client';
 
+/**
+ * useContract Hook
+ * Handles smart contract interactions and transaction state
+ * @module useContract
+ * @version 2.1.0
+ */
+
 import { useState, useCallback, useMemo } from 'react';
 import { openContractCall } from '@stacks/connect';
 import { mintNFT, createCollection } from '@/lib/contracts';
 
+// Transaction status types
 type TransactionStatus = 'idle' | 'pending' | 'confirming' | 'success' | 'error';
+
+// Confirmation thresholds
+const REQUIRED_CONFIRMATIONS = 1;
+const MAX_CONFIRMATIONS_TO_TRACK = 6;
 
 interface TransactionState {
   status: TransactionStatus;
