@@ -1,10 +1,26 @@
 import Link from 'next/link';
 
+/**
+ * Footer Component
+ * Site-wide footer with navigation links and social icons
+ * @module components/Footer
+ */
+
 // Footer component version
 const FOOTER_VERSION = '1.2.0';
 
+// Company information
+const COMPANY_INFO = {
+  name: 'StacksMint',
+  tagline: 'NFT Minting on Bitcoin',
+  startYear: 2024,
+} as const;
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const copyrightYears = currentYear > COMPANY_INFO.startYear 
+    ? `${COMPANY_INFO.startYear}-${currentYear}` 
+    : `${COMPANY_INFO.startYear}`;
   
   const footerLinks = {
     product: [
