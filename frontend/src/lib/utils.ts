@@ -200,17 +200,23 @@ export function slugify(text: string): string {
 // IPFS Utilities
 // ============================================================================
 
+// IPFS gateway configuration
 const IPFS_GATEWAYS = [
   'https://ipfs.io/ipfs/',
   'https://cloudflare-ipfs.com/ipfs/',
   'https://gateway.pinata.cloud/ipfs/',
-];
+] as const;
+
+const IPFS_PROTOCOL_PREFIX = 'ipfs://';
+const DEFAULT_GATEWAY_INDEX = 0;
+
+type IPFSGateway = typeof IPFS_GATEWAYS[number];
 
 /**
  * Check if URL is an IPFS URL
  */
 export function isIPFSUrl(url: string): boolean {
-  return url.startsWith('ipfs://') || 
+  return url.startsWith(IPFS_PROTOCOL_PREFIX) || 
          url.includes('/ipfs/') ||
          url.includes('ipfs.io');
 }
