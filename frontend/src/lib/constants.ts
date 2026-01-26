@@ -1,6 +1,8 @@
 /**
  * StacksMint Constants
  * Centralized configuration for the application
+ * @module constants
+ * @version 2.0.0
  */
 
 // ============================================================================
