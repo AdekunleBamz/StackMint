@@ -2,11 +2,17 @@
  * StacksMint Utility Functions
  * Common helper functions used throughout the application
  * @module utils
- * @version 2.0.0
+ * @version 2.1.0
  */
 
 // Type definitions for utility functions
 export type NetworkType = 'mainnet' | 'testnet';
+export type AddressPrefix = 'SP' | 'ST';
+
+// Address formatting constants
+const DEFAULT_PREFIX_CHARS = 6;
+const DEFAULT_SUFFIX_CHARS = 4;
+const MIN_ADDRESS_LENGTH = 38;
 
 // ============================================================================
 // Address Formatting
