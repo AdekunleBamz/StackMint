@@ -1,12 +1,24 @@
 'use client';
 
+/**
+ * WalletContext
+ * Global context for wallet state management
+ * @module WalletContext
+ * @version 2.1.0
+ */
+
 import { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from 'react';
 import { connectWallet as stacksConnect, disconnectWallet as stacksDisconnect, isConnected as stacksIsConnected, getUserAddress } from '@/lib/stacks';
 import { wcConnect, wcDisconnect, isWCConnected, getWCSession } from '@/lib/walletconnect';
 
+// Wallet and network type definitions
 type WalletType = 'stacks' | 'walletconnect' | null;
 type NetworkType = 'mainnet' | 'testnet' | 'devnet';
 type ConnectionStatus = 'disconnected' | 'connecting' | 'connected' | 'error';
+
+// Storage configuration
+const STORAGE_KEY = 'stacksmint_wallet_preference';
+const CONNECTION_RETRY_DELAY_MS = 1000;
 
 interface WalletState {
   address: string | null;
