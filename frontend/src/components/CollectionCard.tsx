@@ -1,7 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo, memo } from 'react';
 import Link from 'next/link';
+
+/**
+ * CollectionCard Component
+ * Displays a collection with image, stats, and verification status
+ * @module components/CollectionCard
+ */
+
+// Gradient presets for collection backgrounds
+const GRADIENT_PRESETS = [
+  'from-purple-600 to-blue-600',
+  'from-pink-600 to-purple-600',
+  'from-blue-600 to-cyan-600',
+  'from-orange-600 to-red-600',
+  'from-green-600 to-teal-600',
+] as const;
 
 interface CollectionCardProps {
   name: string;
