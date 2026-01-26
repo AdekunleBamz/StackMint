@@ -1,12 +1,22 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+
+/**
+ * SearchBar Component
+ * Provides search functionality with suggestions and recent searches
+ * @module components/SearchBar
+ */
+
+const MIN_QUERY_LENGTH = 2;
+const DEBOUNCE_DELAY = 300;
 
 interface SearchBarProps {
   placeholder?: string;
   onSearch: (query: string) => void;
   suggestions?: string[];
   recentSearches?: string[];
+  minQueryLength?: number;
 }
 
 export default function SearchBar({ 
