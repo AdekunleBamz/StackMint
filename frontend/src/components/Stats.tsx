@@ -1,6 +1,10 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, type RefObject } from 'react';
+
+// Stats animation configuration
+const INTERSECTION_THRESHOLD = 0.1;
+const ANIMATION_DURATION = 500;
 
 interface StatItemProps {
   value: string;
