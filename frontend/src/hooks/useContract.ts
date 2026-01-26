@@ -61,6 +61,10 @@ const INITIAL_STATE: TransactionState = {
   confirmations: 0,
 };
 
+// Explorer URL configuration
+const EXPLORER_BASE_URL = 'https://explorer.stacks.co';
+const buildExplorerUrl = (txId: string) => `${EXPLORER_BASE_URL}/txid/${txId}`;
+
 export function useContract(): UseContractReturn {
   const [state, setState] = useState<TransactionState>(INITIAL_STATE);
 
