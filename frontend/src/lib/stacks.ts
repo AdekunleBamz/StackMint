@@ -1,3 +1,10 @@
+/**
+ * Stacks Wallet Integration
+ * Handles wallet connections and blockchain interactions
+ * @module stacks
+ * @version 2.0.0
+ */
+
 import { 
   AppConfig, 
   showConnect, 
@@ -15,7 +22,11 @@ import type { ContractCallOptions, STXTransferOptions } from '@stacks/connect';
 // Configuration
 // ============================================================================
 
-const appConfig = new AppConfig(['store_write', 'publish_data']);
+// App permissions required for wallet connection
+const APP_PERMISSIONS = ['store_write', 'publish_data'] as const;
+type AppPermission = typeof APP_PERMISSIONS[number];
+
+const appConfig = new AppConfig([...APP_PERMISSIONS]);
 export const userSession = new UserSession({ appConfig });
 
 export const appDetails = {
