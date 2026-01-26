@@ -106,15 +106,24 @@ export function formatSTXCompact(microSTX: number | string): string {
 // Date/Time Formatting
 // ============================================================================
 
+// Date format options
+const DATE_FORMAT_OPTIONS: Intl.DateTimeFormatOptions = {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
+};
+
+const TIME_FORMAT_OPTIONS: Intl.DateTimeFormatOptions = {
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: true,
+};
+
 /**
  * Format a timestamp to a readable date string
  */
 export function formatDate(timestamp: number): string {
-  return new Date(timestamp).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  return new Date(timestamp).toLocaleDateString('en-US', DATE_FORMAT_OPTIONS);
 }
 
 /**
