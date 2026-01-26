@@ -2,13 +2,13 @@
 
 /**
  * CTASection Component
- * Call-to-action section with animated elements
+ * Call-to-action section with animated elements and gradient background
  * @module CTASection
- * @version 2.2.0
+ * @version 2.3.0
  */
 
 import Link from 'next/link';
-import { useEffect, useRef, useState, memo } from 'react';
+import { useEffect, useRef, useState, memo, type FC } from 'react';
 
 // CTA content configuration
 const CTA_CONFIG = {
@@ -19,6 +19,26 @@ const CTA_CONFIG = {
 // Button text constants
 const PRIMARY_CTA_TEXT = 'Start Minting';
 const SECONDARY_CTA_TEXT = 'View Collections';
+
+/** Intersection observer threshold */
+const VISIBILITY_THRESHOLD = 0.2;
+
+/** Animation delay between floating elements */
+const FLOAT_STAGGER_DELAY = 200;
+
+/**
+ * CTA button variant
+ */
+type CTAButtonVariant = 'primary' | 'secondary' | 'outline';
+
+/**
+ * Floating icon configuration
+ */
+interface FloatingIcon {
+  emoji: string;
+  position: 'top-right' | 'bottom-left' | 'center-right';
+  opacity: number;
+}
 
 function CTASectionComponent() {
   const [isVisible, setIsVisible] = useState(false);

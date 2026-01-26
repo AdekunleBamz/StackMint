@@ -2,24 +2,42 @@
 
 /**
  * FeatureCard Component
- * Animated feature card with intersection observer
+ * Animated feature card with intersection observer and hover effects
  * @module FeatureCard
- * @version 2.2.0
+ * @version 2.3.0
  */
 
-import { useRef, useState, useEffect, memo } from 'react';
+import { useRef, useState, useEffect, memo, type FC } from 'react';
+
+/**
+ * Feature card size variants
+ */
+type FeatureCardSize = 'sm' | 'md' | 'lg';
+
+/**
+ * Feature card color theme
+ */
+type FeatureCardTheme = 'purple' | 'blue' | 'orange' | 'green';
 
 interface FeatureCardProps {
   icon: string;
   title: string;
   description: string;
   delay?: number;
+  size?: FeatureCardSize;
+  theme?: FeatureCardTheme;
 }
 
 // Intersection observer configuration
 const VISIBILITY_THRESHOLD = 0.1;
 const DEFAULT_ANIMATION_DELAY = 0;
 const ANIMATION_DURATION_CLASS = 'duration-500';
+
+/** Hover scale multiplier */
+const HOVER_SCALE = 1.1;
+
+/** Hover rotation degrees */
+const HOVER_ROTATION = 3;
 
 function FeatureCardComponent({ icon, title, description, delay = DEFAULT_ANIMATION_DELAY }: FeatureCardProps) {
   const [isVisible, setIsVisible] = useState(false);
