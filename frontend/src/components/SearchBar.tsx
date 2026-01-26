@@ -1,15 +1,20 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
-
 /**
  * SearchBar Component
  * Provides search functionality with suggestions and recent searches
  * @module components/SearchBar
+ * @version 2.2.0
  */
 
+import { useState, useRef, useEffect, useCallback } from 'react';
+
+// Search configuration
 const MIN_QUERY_LENGTH = 2;
 const DEBOUNCE_DELAY = 300;
+const DEFAULT_PLACEHOLDER = 'Search NFTs, collections, creators...';
+const MAX_SUGGESTIONS = 5;
+const MAX_RECENT_SEARCHES = 5;
 
 interface SearchBarProps {
   placeholder?: string;
