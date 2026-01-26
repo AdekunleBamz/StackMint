@@ -1,5 +1,12 @@
 'use client';
 
+/**
+ * FeatureCard Component
+ * Animated feature card with intersection observer
+ * @module FeatureCard
+ * @version 2.2.0
+ */
+
 import { useRef, useState, useEffect, memo } from 'react';
 
 interface FeatureCardProps {
@@ -9,10 +16,12 @@ interface FeatureCardProps {
   delay?: number;
 }
 
-// Intersection observer threshold
+// Intersection observer configuration
 const VISIBILITY_THRESHOLD = 0.1;
+const DEFAULT_ANIMATION_DELAY = 0;
+const ANIMATION_DURATION_CLASS = 'duration-500';
 
-function FeatureCardComponent({ icon, title, description, delay = 0 }: FeatureCardProps) {
+function FeatureCardComponent({ icon, title, description, delay = DEFAULT_ANIMATION_DELAY }: FeatureCardProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
