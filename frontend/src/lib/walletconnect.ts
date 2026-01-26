@@ -121,10 +121,15 @@ export interface WCSignMessageResult {
 // Provider Management
 // ============================================================================
 
+// Provider state
 let provider: UniversalProvider | null = null;
 let isInitializing = false;
 let initPromise: Promise<UniversalProvider> | null = null;
 let currentNetwork: StacksChain = 'mainnet';
+
+// Provider state types
+type ProviderState = 'uninitialized' | 'initializing' | 'ready' | 'error';
+let providerState: ProviderState = 'uninitialized';
 
 /**
  * Check if WalletConnect project ID is configured
