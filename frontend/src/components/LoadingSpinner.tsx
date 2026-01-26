@@ -1,7 +1,19 @@
+/**
+ * LoadingSpinner Component
+ * Customizable loading spinner with multiple variants
+ * @module LoadingSpinner
+ * @version 2.1.0
+ */
+
 import { memo } from 'react';
 
 type SpinnerSize = 'sm' | 'md' | 'lg' | 'xl';
 type SpinnerVariant = 'default' | 'dots' | 'pulse' | 'bars';
+
+// Default configuration
+const DEFAULT_SIZE: SpinnerSize = 'md';
+const DEFAULT_VARIANT: SpinnerVariant = 'default';
+const DOT_COUNT = 3;
 
 interface LoadingSpinnerProps {
   size?: SpinnerSize;
