@@ -1,11 +1,16 @@
+import { memo } from 'react';
+
+type SpinnerSize = 'sm' | 'md' | 'lg' | 'xl';
+type SpinnerVariant = 'default' | 'dots' | 'pulse' | 'bars';
+
 interface LoadingSpinnerProps {
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  variant?: 'default' | 'dots' | 'pulse' | 'bars';
+  size?: SpinnerSize;
+  variant?: SpinnerVariant;
   text?: string;
   fullScreen?: boolean;
 }
 
-export default function LoadingSpinner({ 
+function LoadingSpinnerComponent({ 
   size = 'md', 
   variant = 'default',
   text,
@@ -93,3 +98,9 @@ export default function LoadingSpinner({
 
   return content;
 }
+
+// Memoize for performance
+const LoadingSpinner = memo(LoadingSpinnerComponent);
+LoadingSpinner.displayName = 'LoadingSpinner';
+
+export default LoadingSpinner;
