@@ -1,5 +1,8 @@
 import Link from 'next/link';
 
+// Footer component version
+const FOOTER_VERSION = '1.2.0';
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   
