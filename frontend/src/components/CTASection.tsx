@@ -1,5 +1,12 @@
 'use client';
 
+/**
+ * CTASection Component
+ * Call-to-action section with animated elements
+ * @module CTASection
+ * @version 2.2.0
+ */
+
 import Link from 'next/link';
 import { useEffect, useRef, useState, memo } from 'react';
 
@@ -8,6 +15,10 @@ const CTA_CONFIG = {
   animationThreshold: 0.2,
   transitionDuration: 700,
 };
+
+// Button text constants
+const PRIMARY_CTA_TEXT = 'Start Minting';
+const SECONDARY_CTA_TEXT = 'View Collections';
 
 function CTASectionComponent() {
   const [isVisible, setIsVisible] = useState(false);
