@@ -1,6 +1,18 @@
 'use client';
 
+/**
+ * PriceInput Component
+ * STX price input with USD conversion and quick amounts
+ * @module PriceInput
+ * @version 2.1.0
+ */
+
 import { useState, useEffect } from 'react';
+
+// Price display configuration
+const DEFAULT_USD_DECIMALS = 2;
+const DEFAULT_MIN_PRICE = 0;
+const DEFAULT_QUICK_AMOUNTS = [0.1, 0.5, 1, 5, 10];
 
 interface PriceInputProps {
   value: string;
