@@ -174,9 +174,37 @@ export default function SearchBar({
           {/* No results */}
           {query && filteredSuggestions.length === 0 && (
             <div className="p-6 text-center text-gray-500">
-              <p>No results found for "{query}"</p>
+              <div className="text-3xl mb-2">🔍</div>
+              <p className="font-medium text-gray-400">No results found</p>
+              <p className="text-sm mt-1">Try searching for "{query.slice(0, 3)}..." or browse collections</p>
             </div>
           )}
+          
+          {/* Quick filters */}
+          <div className="border-t border-gray-800 p-3">
+            <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Quick Filters</p>
+            <div className="flex flex-wrap gap-2">
+              {['Art', 'Collectibles', 'Gaming', 'Music', 'Photography'].map((filter) => (
+                <button
+                  key={filter}
+                  onClick={() => handleSuggestionClick(filter)}
+                  className="px-3 py-1.5 text-xs bg-gray-800 hover:bg-purple-600/20 hover:text-purple-400 text-gray-400 rounded-full transition-colors"
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          {/* Keyboard shortcut hint */}
+          <div className="border-t border-gray-800 px-4 py-2 flex items-center justify-between text-xs text-gray-600">
+            <span>Press Enter to search</span>
+            <span className="flex items-center gap-1">
+              <kbd className="px-1.5 py-0.5 bg-gray-800 rounded text-gray-500 font-mono">⌘</kbd>
+              <kbd className="px-1.5 py-0.5 bg-gray-800 rounded text-gray-500 font-mono">K</kbd>
+              <span className="ml-1">to focus</span>
+            </span>
+          </div>
         </div>
       )}
     </div>
