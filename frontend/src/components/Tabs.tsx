@@ -108,24 +108,24 @@ function useTabsContext() {
 
 const variantStyles: Record<TabsVariant, { list: string; tab: string; activeTab: string }> = {
   default: {
-    list: 'border-b border-gray-700',
-    tab: 'border-b-2 border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600',
-    activeTab: 'border-orange-500 text-orange-400',
+    list: 'border-b border-gray-700/50',
+    tab: 'border-b-2 border-transparent text-gray-400 hover:text-white hover:border-gray-600',
+    activeTab: 'border-purple-500 text-purple-400',
   },
   pills: {
-    list: 'bg-gray-800/50 rounded-lg p-1',
-    tab: 'rounded-md text-gray-400 hover:text-white hover:bg-gray-700/50',
-    activeTab: 'bg-gray-700 text-white shadow-sm',
+    list: 'bg-gray-800/50 rounded-xl p-1.5 border border-gray-700/50',
+    tab: 'rounded-lg text-gray-400 hover:text-white hover:bg-gray-700/50',
+    activeTab: 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow-lg shadow-purple-500/20',
   },
   underline: {
     list: '',
-    tab: 'text-gray-400 hover:text-white relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-transparent hover:after:bg-gray-600',
-    activeTab: 'text-orange-400 after:bg-orange-500',
+    tab: 'text-gray-400 hover:text-white relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-transparent hover:after:bg-gray-700/50 hover:after:scale-x-100 after:scale-x-0 after:transition-transform',
+    activeTab: 'text-purple-400 after:bg-purple-500 after:scale-x-100',
   },
   enclosed: {
-    list: 'border-b border-gray-700',
+    list: 'border-b border-gray-700/50',
     tab: 'border border-transparent rounded-t-lg text-gray-400 hover:text-white hover:bg-gray-800/50 -mb-px',
-    activeTab: 'bg-gray-900 border-gray-700 border-b-gray-900 text-white',
+    activeTab: 'bg-gray-900 border-gray-700/50 border-b-gray-900 text-white',
   },
 };
 
