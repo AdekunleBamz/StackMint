@@ -1,0 +1,19 @@
+---
+id: 8
+name: StacksMint v2.1.3 Marketplace Only
+network: mainnet
+stacks-node: "https://api.mainnet.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoin.blockstack.com:8332"
+plan:
+  batches:
+    # Deploy Marketplace v2.1.3
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: stacksmint-marketplace-v2-1-3
+            expected-sender: SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N
+            cost: 100000
+            path: contracts/stacksmint-marketplace-v2-1-3.clar
+            anchor-block-only: true
+            clarity-version: 2
+      epoch: "3.0"

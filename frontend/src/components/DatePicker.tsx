@@ -360,7 +360,7 @@ export function DateRangePicker({
 
   const formatRange = () => {
     if (!startDate && !endDate) return placeholder;
-    const format = (d: Date | null) => d?.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) || '...';
+    const format = (d: Date | null | undefined) => d?.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) || '...';
     return `${format(startDate)} → ${format(endDate)}`;
   };
 

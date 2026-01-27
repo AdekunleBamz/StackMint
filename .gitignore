@@ -1,19 +1,15 @@
-# Deployment files with sensitive data
+# Deployment
 Clarinet.toml
 testnet.toml
 devnet.toml
 
-# Wallet and key files
+# Sensitive files
 wallets.json
 *.mnemonic
 *.key
 *.secret
-
-# Results and data files
 *-results.json
 *-results-*.json
-funding-results.json
-interaction-results*.json
 
 # Node modules
 node_modules/
@@ -31,14 +27,14 @@ Thumbs.db
 
 # Build artifacts
 .cache/
+.next/
 
 # Environment
 .env
 .env.*
 
-# Settings with sensitive data
+# Settings
 settings/
 
-# Scripts (internal tooling)
+# Personal tools
 scripts/
-.next/

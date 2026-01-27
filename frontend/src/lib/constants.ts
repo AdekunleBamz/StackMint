@@ -47,16 +47,16 @@ export const DEFAULT_NETWORK = 'mainnet';
 
 export const CONTRACTS = {
   mainnet: {
-    nft: 'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.stacksmint-nft',
-    marketplace: 'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.stacksmint-marketplace',
-    collection: 'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.stacksmint-collection',
-    treasury: 'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.stacksmint-treasury',
+    nft: 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.stacksmint-nft-v2-1-3',
+    marketplace: 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.stacksmint-marketplace-v2-1-3',
+    collection: 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.stacksmint-collection-v2-1-3',
+    treasury: 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.stacksmint-treasury-v2-1',
   },
   testnet: {
-    nft: 'ST2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.stacksmint-nft',
-    marketplace: 'ST2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.stacksmint-marketplace',
-    collection: 'ST2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.stacksmint-collection',
-    treasury: 'ST2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.stacksmint-treasury',
+    nft: 'ST3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.stacksmint-nft-v2-1-3',
+    marketplace: 'ST3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.stacksmint-marketplace-v2-1-3',
+    collection: 'ST3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.stacksmint-collection-v2-1-3',
+    treasury: 'ST3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N.stacksmint-treasury-v2-1',
   },
 } as const;
 

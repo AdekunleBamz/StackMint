@@ -237,3 +237,29 @@ export function getExplorerUrl(txId: string, network: NetworkType = DEFAULT_NETW
 export function getAddressExplorerUrl(address: string, network: NetworkType = DEFAULT_NETWORK as NetworkType): string {
   return `${NETWORKS[network].explorerUrl}/address/${address}`;
 }
+
+/**
+ * Fetch STX balance for an address
+ */
+export async function fetchSTXBalance(address: string, network: NetworkType = DEFAULT_NETWORK as NetworkType): Promise<{
+  balance: number;
+  locked: number;
+  total: number;
+}> {
+  const baseUrl = NETWORKS[network].url;
+  const response = await fetch(`${baseUrl}/extended/v1/address/${address}/balances`);
+  
+  if (!response.ok) {
+    throw new APIError(`Failed to fetch balance: ${response.statusText}`, response.status);
+  }
+  
+  const data = await response.json();
+  const balance = parseInt(data.stx?.balance || '0', 10);
+  const locked = parseInt(data.stx?.locked || '0', 10);
+  
+  return {
+    balance,
+    locked,
+    total: balance + locked,
+  };
+}

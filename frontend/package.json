@@ -1,0 +1,55 @@
+{
+  "name": "stacksmint-frontend",
+  "version": "2.2.0",
+  "private": true,
+  "description": "StacksMint NFT Platform - Frontend",
+  "homepage": "https://stacksmint.io",
+  "keywords": [
+    "nft",
+    "stacks",
+    "blockchain",
+    "web3",
+    "marketplace"
+  ],
+  "bugs": {
+    "url": "https://github.com/stacksmint/stacksmint/issues"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "clean": "rm -rf .next node_modules"
+  },
+  "dependencies": {
+    "@stacks/auth": "^6.16.1",
+    "@stacks/common": "^6.16.0",
+    "@stacks/connect": "^7.9.0",
+    "@stacks/encryption": "^6.16.0",
+    "@stacks/network": "^6.16.0",
+    "@stacks/profile": "^6.16.0",
+    "@stacks/stacking": "^6.16.0",
+    "@stacks/transactions": "^6.16.1",
+    "@tanstack/react-query": "^5.17.0",
+    "@walletconnect/modal": "^2.7.0",
+    "@walletconnect/universal-provider": "^2.23.4",
+    "clsx": "^2.1.0",
+    "lucide-react": "^0.312.0",
+    "next": "14.2.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.2.0",
+    "zustand": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.2.3",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3"
+  }
+}

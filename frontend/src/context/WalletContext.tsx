@@ -60,8 +60,6 @@ interface WalletContextType {
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined);
 
-const STORAGE_KEY = 'stacksmint_wallet_preference';
-
 export function WalletProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<WalletState>({
     address: null,

@@ -1,0 +1,43 @@
+---
+id: 5
+name: StacksMint v2.1.2 Mainnet Deployment
+network: mainnet
+stacks-node: "https://api.mainnet.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoin.blockstack.com:8332"
+plan:
+  batches:
+    # Batch 0: Deploy NFT v2.1.2 (references existing treasury-v2-1)
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: stacksmint-nft-v2-1-2
+            expected-sender: SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N
+            cost: 100000
+            path: contracts/stacksmint-nft-v2-1-2.clar
+            anchor-block-only: true
+            clarity-version: 2
+      epoch: "3.0"
+    
+    # Batch 1: Deploy Collection v2.1.2 (references existing treasury-v2-1)
+    - id: 1
+      transactions:
+        - contract-publish:
+            contract-name: stacksmint-collection-v2-1-2
+            expected-sender: SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N
+            cost: 100000
+            path: contracts/stacksmint-collection-v2-1-2.clar
+            anchor-block-only: true
+            clarity-version: 2
+      epoch: "3.0"
+    
+    # Batch 2: Deploy Marketplace v2.1.2 (references existing treasury-v2-1 and new nft-v2-1-2)
+    - id: 2
+      transactions:
+        - contract-publish:
+            contract-name: stacksmint-marketplace-v2-1-2
+            expected-sender: SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N
+            cost: 100000
+            path: contracts/stacksmint-marketplace-v2-1-2.clar
+            anchor-block-only: true
+            clarity-version: 2
+      epoch: "3.0"

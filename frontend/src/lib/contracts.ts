@@ -24,7 +24,7 @@ import {
   hexToCV,
   cvToHex,
   type TxBroadcastResult,
-  fetchCallReadOnlyFunction,
+  callReadOnlyFunction,
 } from '@stacks/transactions';
 import { userSession } from './stacks';
 
@@ -39,19 +39,19 @@ const DEFAULT_POST_CONDITION_MODE = PostConditionMode.Deny;
 export const CONTRACT_CONFIG = {
   mainnet: {
     address: 'SP3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N',
-    nft: 'stacksmint-nft',
-    collection: 'stacksmint-collection',
-    marketplace: 'stacksmint-marketplace',
-    treasury: 'stacksmint-treasury',
+    nft: 'stacksmint-nft-v2-1-3',
+    collection: 'stacksmint-collection-v2-1-3',
+    marketplace: 'stacksmint-marketplace-v2-1-3',
+    treasury: 'stacksmint-treasury-v2-1',
     network: 'mainnet' as const,
     explorerUrl: 'https://explorer.stacks.co',
   },
   testnet: {
     address: 'ST3FKNEZ86RG5RT7SZ5FBRGH85FZNG94ZH1MCGG6N',
-    nft: 'stacksmint-nft',
-    collection: 'stacksmint-collection',
-    marketplace: 'stacksmint-marketplace',
-    treasury: 'stacksmint-treasury',
+    nft: 'stacksmint-nft-v2-1-3',
+    collection: 'stacksmint-collection-v2-1-3',
+    marketplace: 'stacksmint-marketplace-v2-1-3',
+    treasury: 'stacksmint-treasury-v2-1',
     network: 'testnet' as const,
     explorerUrl: 'https://explorer.stacks.co/?chain=testnet',
   },
@@ -323,7 +323,7 @@ export async function getNFTMetadata(tokenId: number, network?: NetworkType): Pr
   const config = getContractConfig(network);
   
   try {
-    const result = await fetchCallReadOnlyFunction({
+    const result = await callReadOnlyFunction({
       contractAddress: config.address,
       contractName: config.nft,
       functionName: 'get-token-uri',
@@ -354,7 +354,7 @@ export async function getNFTOwner(tokenId: number, network?: NetworkType): Promi
   const config = getContractConfig(network);
   
   try {
-    const result = await fetchCallReadOnlyFunction({
+    const result = await callReadOnlyFunction({
       contractAddress: config.address,
       contractName: config.nft,
       functionName: 'get-owner',
@@ -378,7 +378,7 @@ export async function getCollectionInfo(collectionId: number, network?: NetworkT
   const config = getContractConfig(network);
   
   try {
-    const result = await fetchCallReadOnlyFunction({
+    const result = await callReadOnlyFunction({
       contractAddress: config.address,
       contractName: config.collection,
       functionName: 'get-collection',
@@ -401,7 +401,7 @@ export async function getListingInfo(tokenId: number, network?: NetworkType) {
   const config = getContractConfig(network);
   
   try {
-    const result = await fetchCallReadOnlyFunction({
+    const result = await callReadOnlyFunction({
       contractAddress: config.address,
       contractName: config.marketplace,
       functionName: 'get-listing',

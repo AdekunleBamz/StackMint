@@ -25,6 +25,7 @@ interface UseWalletReturn {
   shortAddress: string | null;
   isConnected: boolean;
   isConnecting: boolean;
+  connecting: boolean; // Alias for isConnecting
   isLoading: boolean;
   walletType: WalletType;
   error: string | null;
@@ -121,6 +122,7 @@ export function useWallet(): UseWalletReturn {
     shortAddress,
     isConnected: context.isConnected,
     isConnecting: context.connecting,
+    connecting: context.connecting, // Alias
     isLoading: context.loading,
     walletType: context.walletType,
     error: context.error,
