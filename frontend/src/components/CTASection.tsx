@@ -101,15 +101,32 @@ function CTASectionComponent() {
             
             {/* Trust badges */}
             <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-sm text-gray-400">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 hover:text-gray-300 transition-colors cursor-default">
                 <span className="text-green-400">✓</span> Free to start
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 hover:text-gray-300 transition-colors cursor-default">
                 <span className="text-green-400">✓</span> Bitcoin-secured
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 hover:text-gray-300 transition-colors cursor-default">
                 <span className="text-green-400">✓</span> Under 1 min setup
               </div>
+            </div>
+            
+            {/* Social proof */}
+            <div className="mt-10 flex items-center justify-center gap-2">
+              <div className="flex -space-x-3">
+                {['🧑‍🎨', '👩‍💻', '🧑‍🚀', '👨‍🎤', '👩‍🔬'].map((emoji, i) => (
+                  <div 
+                    key={i}
+                    className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-lg border-2 border-gray-900"
+                  >
+                    {emoji}
+                  </div>
+                ))}
+              </div>
+              <span className="text-gray-400 text-sm ml-3">
+                <span className="text-white font-semibold">2,500+</span> creators this month
+              </span>
             </div>
           </div>
         </div>
@@ -117,3 +134,5 @@ function CTASectionComponent() {
     </section>
   );
 }
+
+export default memo(CTASectionComponent);
