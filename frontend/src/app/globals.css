@@ -762,3 +762,364 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================================================
+   New v2.a Animations and Effects
+   ============================================================================ */
+
+/* Confetti burst animation for successful transactions */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Ripple effect for buttons */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Success checkmark animation */
+@keyframes check-draw {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Typewriter effect */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: rgb(var(--color-primary)); }
+}
+
+/* 3D card flip */
+@keyframes flip-in {
+  0% {
+    transform: perspective(1000px) rotateY(-90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: perspective(1000px) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+/* Shake animation for errors */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Elastic bounce */
+@keyframes elastic-bounce {
+  0% { transform: scale(0); }
+  55% { transform: scale(1.1); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+/* Radar ping for notifications */
+@keyframes radar-ping {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Morphing blob background */
+@keyframes morph-blob {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
+  75% { border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%; }
+}
+
+/* Counter animation */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Glow pulse for live indicators */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgb(34 197 94 / 0.5), 0 0 10px rgb(34 197 94 / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 10px rgb(34 197 94 / 0.8), 0 0 20px rgb(34 197 94 / 0.5);
+  }
+}
+
+/* Animation utility classes */
+.animate-ripple {
+  animation: ripple 0.6s ease-out forwards;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-elastic {
+  animation: elastic-bounce 0.6s ease-out forwards;
+}
+
+.animate-flip-in {
+  animation: flip-in 0.5s ease-out forwards;
+}
+
+.animate-radar-ping {
+  animation: radar-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.animate-morph-blob {
+  animation: morph-blob 8s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.animate-typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid;
+  animation: 
+    typewriter 2s steps(30) forwards,
+    blink-caret 0.75s step-end infinite;
+}
+
+/* Progress bar animation */
+@keyframes progress-stripe {
+  0% { background-position: 1rem 0; }
+  100% { background-position: 0 0; }
+}
+
+.progress-striped {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 1rem 1rem;
+  animation: progress-stripe 1s linear infinite;
+}
+
+/* Skeleton shimmer v2 with better colors */
+.skeleton-v2 {
+  @apply relative overflow-hidden bg-gray-800/50 rounded-lg;
+}
+
+.skeleton-v2::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.5s infinite;
+  transform: translateX(-100%);
+}
+
+/* Hover scale with shadow */
+.hover-scale-shadow {
+  @apply transition-all duration-300;
+}
+
+.hover-scale-shadow:hover {
+  @apply scale-105 shadow-2xl shadow-purple-500/20;
+}
+
+/* Card hover with border glow */
+.card-hover-glow {
+  @apply relative transition-all duration-300;
+}
+
+.card-hover-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, transparent, transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: background 0.3s ease;
+}
+
+.card-hover-glow:hover::before {
+  background: linear-gradient(135deg, rgb(var(--color-primary)), rgb(var(--color-secondary)));
+}
+
+/* Neon text effect */
+.neon-text {
+  text-shadow:
+    0 0 5px rgb(var(--color-primary)),
+    0 0 10px rgb(var(--color-primary)),
+    0 0 20px rgb(var(--color-primary)),
+    0 0 40px rgb(var(--color-primary));
+}
+
+.neon-text-pink {
+  text-shadow:
+    0 0 5px rgb(var(--color-secondary)),
+    0 0 10px rgb(var(--color-secondary)),
+    0 0 20px rgb(var(--color-secondary)),
+    0 0 40px rgb(var(--color-secondary));
+}
+
+/* Glassmorphism v2 with improved blur */
+.glass-v2 {
+  @apply bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08];
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+}
+
+/* Frosted glass effect */
+.frosted-glass {
+  backdrop-filter: blur(20px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+/* Interactive focus ring */
+.focus-ring-interactive {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900;
+}
+
+/* Staggered grid children animation */
+.stagger-grid > * {
+  opacity: 0;
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+.stagger-grid > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-grid > *:nth-child(2) { animation-delay: 50ms; }
+.stagger-grid > *:nth-child(3) { animation-delay: 100ms; }
+.stagger-grid > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-grid > *:nth-child(5) { animation-delay: 200ms; }
+.stagger-grid > *:nth-child(6) { animation-delay: 250ms; }
+.stagger-grid > *:nth-child(7) { animation-delay: 300ms; }
+.stagger-grid > *:nth-child(8) { animation-delay: 350ms; }
+.stagger-grid > *:nth-child(9) { animation-delay: 400ms; }
+.stagger-grid > *:nth-child(10) { animation-delay: 450ms; }
+.stagger-grid > *:nth-child(11) { animation-delay: 500ms; }
+.stagger-grid > *:nth-child(12) { animation-delay: 550ms; }
+
+/* Tooltip animation */
+.tooltip-animate {
+  @apply transition-all duration-200 ease-out;
+  transform: translateY(5px);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.tooltip-trigger:hover .tooltip-animate {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Price change indicators */
+.price-up {
+  @apply text-green-400;
+}
+
+.price-up::before {
+  content: '▲ ';
+  font-size: 0.75em;
+}
+
+.price-down {
+  @apply text-red-400;
+}
+
+.price-down::before {
+  content: '▼ ';
+  font-size: 0.75em;
+}
+
+/* Verified badge shine */
+@keyframes shine {
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
+}
+
+.verified-shine {
+  @apply relative overflow-hidden;
+}
+
+.verified-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: shine 3s ease-in-out infinite;
+}
+
+/* NFT image hover zoom */
+.nft-image-zoom {
+  @apply overflow-hidden;
+}
+
+.nft-image-zoom img {
+  @apply transition-transform duration-500 ease-out;
+}
+
+.nft-image-zoom:hover img {
+  @apply scale-110;
+}
+
+/* Activity feed item animation */
+.activity-item {
+  @apply transition-all duration-300;
+}
+
+.activity-item:hover {
+  @apply bg-white/5 -mx-2 px-2 rounded-lg;
+}
