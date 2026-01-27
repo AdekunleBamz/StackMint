@@ -130,15 +130,19 @@ export default function TransactionHistory() {
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${
+            className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
               filter === f
-                ? 'bg-purple-600 text-white'
-                : 'bg-gray-800/50 text-gray-400 hover:text-white'
+                ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/25'
+                : 'bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50'
             }`}
           >
-            {f.charAt(0).toUpperCase() + f.slice(1)}
+            {f === 'all' ? '📋 All' : f === 'success' ? '✅ Success' : '⏳ Pending'}
           </button>
         ))}
+        <div className="ml-auto flex items-center gap-1 text-xs text-gray-500">
+          <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+          Live
+        </div>
       </div>
 
       {/* Transaction List */}
