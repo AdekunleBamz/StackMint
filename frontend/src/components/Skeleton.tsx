@@ -37,9 +37,14 @@ export function Skeleton({
 
   return (
     <div
-      className={`bg-gray-700/50 ${roundedClasses[rounded]} ${animate ? 'animate-pulse' : ''} ${className}`}
-      style={style}
+      className={`bg-gradient-to-r from-gray-700/50 via-gray-600/50 to-gray-700/50 background-animate ${roundedClasses[rounded]} ${animate ? 'animate-pulse' : ''} ${className}`}
+      style={{
+        ...style,
+        backgroundSize: '200% 100%',
+        animation: animate ? 'shimmer 2s ease-in-out infinite' : undefined,
+      }}
       aria-hidden="true"
+      role="presentation"
     />
   );
 }
