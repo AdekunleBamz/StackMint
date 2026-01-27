@@ -144,7 +144,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
     return (
       <div
         ref={ref}
-        className={`relative inline-flex shrink-0 ${className}`}
+        className={`relative inline-flex shrink-0 group ${className}`}
         {...props}
       >
         {/* Avatar Container */}
@@ -155,14 +155,15 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
             overflow-hidden
             flex items-center justify-center
             ${showFallback ? getColorFromName(name) : 'bg-gray-700'}
-            ring-2 ring-gray-800
+            ring-2 ring-gray-800 group-hover:ring-purple-500/50
+            transition-all duration-300 group-hover:scale-105
           `}
         >
           {!showFallback ? (
             <img
               src={src}
               alt={alt || name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               onError={() => setImageError(true)}
               loading="lazy"
             />
@@ -184,6 +185,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
               ${statusColors[status]}
               ${shape === 'circle' ? 'rounded-full' : 'rounded-sm'}
               ring-2 ring-gray-900
+              ${status === 'online' ? 'animate-pulse' : ''}
             `}
             aria-label={`Status: ${status}`}
           />
