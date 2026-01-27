@@ -4,7 +4,7 @@ import Link from 'next/link';
  * Hero Component
  * Main landing section with CTA and animated background
  * @module components/Hero
- * @version 3.0.0
+ * @version 3.1.0
  */
 
 /**
@@ -19,6 +19,17 @@ interface BlurElement {
   position: string;
   size: string;
   color: string;
+}
+
+/**
+ * Featured NFT type
+ */
+interface FeaturedNFT {
+  id: string;
+  name: string;
+  collection: string;
+  image: string;
+  price: string;
 }
 
 // Animation configuration
@@ -59,6 +70,13 @@ const LIVE_STATS = [
   { value: '10K+', label: 'NFTs Minted' },
   { value: '2.5K+', label: 'Collectors' },
   { value: '500+', label: 'Collections' },
+];
+
+// Featured NFTs for showcase
+const FEATURED_NFTS: FeaturedNFT[] = [
+  { id: '1', name: 'Cosmic Dreamer #42', collection: 'Stacks Punks', image: '🎭', price: '150 STX' },
+  { id: '2', name: 'Bitcoin Buddha', collection: 'CryptoArt', image: '🧘', price: '280 STX' },
+  { id: '3', name: 'Neon Genesis #7', collection: 'Digital Souls', image: '🤖', price: '95 STX' },
 ];
 
 export default function Hero() {
@@ -175,9 +193,54 @@ export default function Hero() {
             ))}
           </div>
         </div>
+
+        {/* Featured NFT Showcase */}
+        <div className="mt-16 animate-fade-in-up stagger-6">
+          <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-6">
+            🔥 Trending Now
+          </h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            {FEATURED_NFTS.map((nft, index) => (
+              <Link
+                key={nft.id}
+                href={`/marketplace/${nft.id}`}
+                className="group relative flex items-center gap-3 bg-gray-800/50 hover:bg-gray-800 border border-gray-700/50 hover:border-purple-500/50 rounded-2xl px-4 py-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/10"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {/* NFT Preview */}
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                  {nft.image}
+                </div>
+                
+                {/* NFT Info */}
+                <div className="text-left">
+                  <p className="text-sm font-medium text-white group-hover:text-purple-300 transition-colors">
+                    {nft.name}
+                  </p>
+                  <p className="text-xs text-gray-500">{nft.collection}</p>
+                </div>
+                
+                {/* Price */}
+                <div className="ml-2 px-2 py-1 bg-green-500/10 rounded-lg">
+                  <span className="text-xs font-medium text-green-400">{nft.price}</span>
+                </div>
+                
+                {/* Hover arrow */}
+                <svg 
+                  className="w-4 h-4 text-gray-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            ))}
+          </div>
+        </div>
         
         {/* Scroll indicator */}
-        <div className="mt-16 flex flex-col items-center animate-fade-in-up stagger-6">
+        <div className="mt-16 flex flex-col items-center animate-fade-in-up stagger-7">
           <span className="text-xs text-gray-600 uppercase tracking-widest mb-3">Scroll to explore</span>
           <div className="w-6 h-10 border-2 border-gray-700 rounded-full flex justify-center p-2">
             <div className="w-1 h-2 bg-gray-500 rounded-full animate-bounce" />
