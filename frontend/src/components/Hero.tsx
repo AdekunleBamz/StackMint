@@ -164,8 +164,8 @@ export default function Hero() {
         <div className="mt-16 pt-10 border-t border-gray-800/50 animate-fade-in-up stagger-5">
           <div className="grid grid-cols-3 gap-8 max-w-lg mx-auto">
             {LIVE_STATS.map((stat, index) => (
-              <div key={stat.label} className="text-center">
-                <p className="text-2xl sm:text-3xl font-bold text-white mb-1 tabular-nums">
+              <div key={stat.label} className="text-center group cursor-default">
+                <p className="text-2xl sm:text-3xl font-bold text-white mb-1 tabular-nums group-hover:text-purple-400 transition-colors">
                   {stat.value}
                 </p>
                 <p className="text-xs sm:text-sm text-gray-500 uppercase tracking-wider">
@@ -173,6 +173,14 @@ export default function Hero() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+        
+        {/* Scroll indicator */}
+        <div className="mt-16 flex flex-col items-center animate-fade-in-up stagger-6">
+          <span className="text-xs text-gray-600 uppercase tracking-widest mb-3">Scroll to explore</span>
+          <div className="w-6 h-10 border-2 border-gray-700 rounded-full flex justify-center p-2">
+            <div className="w-1 h-2 bg-gray-500 rounded-full animate-bounce" />
           </div>
         </div>
       </div>
