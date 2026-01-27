@@ -152,12 +152,22 @@ function NFTCardComponent({
         
         {/* Quick action overlay */}
         <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-          <button 
-            onClick={onView}
-            className="w-full bg-white/90 hover:bg-white text-gray-900 font-medium px-4 py-2.5 rounded-xl backdrop-blur-sm transition-colors"
-          >
-            View Details
-          </button>
+          <div className="flex gap-2">
+            <button 
+              onClick={onView}
+              className="flex-1 bg-white/90 hover:bg-white text-gray-900 font-medium px-4 py-2.5 rounded-xl backdrop-blur-sm transition-colors text-sm"
+            >
+              View Details
+            </button>
+            {price !== undefined && onBuy && (
+              <button 
+                onClick={onBuy}
+                className="bg-purple-600 hover:bg-purple-500 text-white font-medium px-4 py-2.5 rounded-xl transition-colors text-sm"
+              >
+                Buy
+              </button>
+            )}
+          </div>
         </div>
         
         {/* Price Badge */}
@@ -168,13 +178,30 @@ function NFTCardComponent({
             </span>
           </div>
         )}
+        
+        {/* Time remaining badge for listings */}
+        {price !== undefined && (
+          <div className="absolute bottom-3 left-3 opacity-100 group-hover:opacity-0 transition-opacity duration-200">
+            <span className="bg-black/60 backdrop-blur-md text-gray-300 text-xs font-medium px-2 py-1 rounded-lg flex items-center gap-1">
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              2d left
+            </span>
+          </div>
+        )}
       </div>
       
       {/* Content */}
       <div className="p-4">
-        {/* Collection name */}
+        {/* Collection name with verified badge */}
         {collection && (
-          <p className="text-xs text-purple-400 font-medium mb-1 truncate">{collection}</p>
+          <div className="flex items-center gap-1.5 mb-1">
+            <p className="text-xs text-purple-400 font-medium truncate">{collection}</p>
+            <span className="w-3.5 h-3.5 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+              <span className="text-[8px] text-white font-bold">✓</span>
+            </span>
+          </div>
         )}
         
         {/* NFT name */}
