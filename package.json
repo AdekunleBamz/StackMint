@@ -1,10 +1,20 @@
 {
   "name": "stacksmint",
-  "version": "1.0.0",
-  "description": "NFT minting platform on Stacks",
+  "version": "2.2.0",
+  "description": "Decentralized NFT minting platform and marketplace on Stacks blockchain",
+  "author": "StacksMint Team",
+  "license": "MIT",
+  "homepage": "https://stacksmint.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AdekunleBamz/StackMint"
+  },
+  "keywords": ["nft", "stacks", "bitcoin", "blockchain", "clarity", "marketplace"],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "start": "cd frontend && npm run start",
+    "lint": "cd frontend && npm run lint",
+    "test": "clarinet test"
   }
 }
