@@ -269,8 +269,8 @@ export function Tab({
       className={`
         flex items-center gap-2
         font-medium
-        transition-all duration-200
-        focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900
+        transition-all duration-300
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900
         ${sizeStyles[size]}
         ${variantStyles[variant].tab}
         ${isActive ? variantStyles[variant].activeTab : ''}
@@ -278,13 +278,13 @@ export function Tab({
         ${className}
       `}
     >
-      {icon && <span className="shrink-0">{icon}</span>}
+      {icon && <span className="shrink-0 transition-transform duration-300 group-hover:scale-110">{icon}</span>}
       <span>{children}</span>
       {badge !== undefined && (
         <span
           className={`
-            ml-1 px-2 py-0.5 text-xs font-medium rounded-full
-            ${isActive ? 'bg-orange-500/20 text-orange-400' : 'bg-gray-700 text-gray-400'}
+            ml-1 px-2 py-0.5 text-xs font-medium rounded-full transition-colors duration-300
+            ${isActive ? 'bg-white/20 text-white' : 'bg-gray-700/50 text-gray-400'}
           `}
         >
           {badge}
