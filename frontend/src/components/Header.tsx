@@ -269,43 +269,99 @@ export default function Header() {
         </div>
 
         {/* Mobile Navigation Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-gray-900/95 backdrop-blur-xl border-b border-purple-500/20 animate-fade-in">
-            <nav className="p-4 space-y-2">
-              {navLinks.map((link) => (
+        <div
+          id="mobile-menu"
+          className={`md:hidden fixed inset-x-0 top-[72px] bottom-0 bg-gray-950/98 backdrop-blur-xl transform transition-all duration-300 ease-out ${
+            mobileMenuOpen 
+              ? 'translate-y-0 opacity-100 pointer-events-auto' 
+              : '-translate-y-4 opacity-0 pointer-events-none'
+          }`}
+          aria-hidden={!mobileMenuOpen}
+        >
+          <div className="h-full overflow-y-auto pb-safe">
+            <nav className="p-4 space-y-2" role="navigation" aria-label="Mobile navigation">
+              {navLinks.map((link, index) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                  className={`flex items-center gap-3 px-4 py-4 rounded-2xl transition-all duration-300 ${
                     isActive(link.href)
-                      ? 'bg-purple-600 text-white'
-                      : 'text-gray-300 hover:bg-gray-800'
+                      ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg shadow-purple-500/20'
+                      : 'text-gray-300 hover:bg-gray-800/70 hover:text-white'
                   }`}
+                  style={{ 
+                    transitionDelay: mobileMenuOpen ? `${index * 50}ms` : '0ms',
+                    opacity: mobileMenuOpen ? 1 : 0,
+                    transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(-20px)'
+                  }}
                 >
-                  <span>{link.icon}</span>
-                  {link.label}
+                  <span className="text-xl">{link.icon}</span>
+                  <span className="font-medium">{link.label}</span>
+                  {isActive(link.href) && (
+                    <span className="ml-auto">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </span>
+                  )}
                 </Link>
               ))}
-              <div className="pt-4 border-t border-gray-700">
+              
+              {/* Wallet Section */}
+              <div className="pt-6 mt-4 border-t border-gray-800">
+                <p className="px-4 pb-2 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Wallet
+                </p>
                 {isConnected ? (
-                  <button
-                    onClick={disconnect}
-                    className="w-full py-3 text-red-400 hover:bg-red-600/10 rounded-xl transition-colors"
-                  >
-                    Disconnect Wallet
-                  </button>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-3 px-4 py-3 bg-gray-800/50 rounded-xl">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-white truncate">
+                          {address?.slice(0, 8)}...{address?.slice(-6)}
+                        </p>
+                        <p className="text-xs text-gray-400">Connected</p>
+                      </div>
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                    </div>
+                    <button
+                      onClick={disconnect}
+                      className="w-full py-3.5 text-red-400 hover:bg-red-600/10 rounded-xl transition-colors font-medium flex items-center justify-center gap-2"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                      </svg>
+                      Disconnect Wallet
+                    </button>
+                  </div>
                 ) : (
-                  <button
-                    onClick={() => setShowWalletMenu(!showWalletMenu)}
-                    className="w-full py-3 bg-purple-600 text-white rounded-xl font-medium"
-                  >
-                    Connect Wallet
-                  </button>
+                  <div className="space-y-2">
+                    <button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        handleConnect('stacks');
+                      }}
+                      className="w-full py-4 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-xl font-medium flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20"
+                    >
+                      <span className="text-lg">🔗</span>
+                      Connect with Hiro/Leather
+                    </button>
+                    <button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        handleConnect('walletconnect');
+                      }}
+                      className="w-full py-4 bg-gray-800 text-white rounded-xl font-medium flex items-center justify-center gap-2 border border-gray-700"
+                    >
+                      <span className="text-lg">📱</span>
+                      Connect with WalletConnect
+                    </button>
+                  </div>
                 )}
               </div>
             </nav>
           </div>
-        )}
+        </div>
       </header>
       
       {/* WalletConnect QR Modal */}
