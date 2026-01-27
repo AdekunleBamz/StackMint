@@ -7,7 +7,7 @@ import Link from 'next/link';
  * CollectionCard Component
  * Displays a collection with image, stats, and verification status
  * @module components/CollectionCard
- * @version 2.2.0
+ * @version 2.3.0
  */
 
 // Gradient presets for collection backgrounds
@@ -32,8 +32,11 @@ interface CollectionCardProps {
   image?: string;
   floorPrice?: number;
   volume?: number;
+  volume24h?: number;
   verified?: boolean;
   featured?: boolean;
+  owners?: number;
+  change24h?: number;
 }
 
 export default function CollectionCard({ 
@@ -43,11 +46,15 @@ export default function CollectionCard({
   image,
   floorPrice,
   volume,
+  volume24h,
   verified = false,
-  featured = false
+  featured = false,
+  owners,
+  change24h
 }: CollectionCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
   // Generate a consistent gradient based on name
   const getGradient = () => {
@@ -62,6 +69,14 @@ export default function CollectionCard({
     return gradients[index];
   };
 
+  const handleLikeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsLiked(!isLiked);
+  };
+
+  const displayVolume = volume24h ?? volume;
+
   return (
     <Link 
       href={`/collections/${name.toLowerCase().replace(/\s+/g, '-')}`}
@@ -69,13 +84,13 @@ export default function CollectionCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={`bg-gray-900/50 border rounded-2xl overflow-hidden transition-all duration-300 ${
+      <div className={`bg-gradient-to-br from-gray-900/80 to-gray-900/40 backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-300 ${
         isHovered 
           ? 'border-purple-500/50 shadow-xl shadow-purple-500/10 -translate-y-1' 
           : 'border-purple-500/20'
       }`}>
         {/* Image section */}
-        <div className={`h-44 bg-gradient-to-br ${getGradient()} relative overflow-hidden`}>
+        <div className={`h-48 bg-gradient-to-br ${getGradient()} relative overflow-hidden`}>
           {image && !imageError ? (
             <img 
               src={image} 
@@ -85,27 +100,49 @@ export default function CollectionCard({
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <span className="text-5xl opacity-50">📦</span>
+              <span className="text-6xl opacity-50 group-hover:scale-110 transition-transform duration-300">📦</span>
             </div>
           )}
           
+          {/* Gradient overlay on hover */}
+          <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
+          
           {/* Featured badge */}
           {featured && (
-            <div className="absolute top-3 left-3 bg-yellow-500/90 backdrop-blur-sm text-black text-xs font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+            <div className="absolute top-3 left-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-black text-xs font-bold px-2.5 py-1 rounded-lg flex items-center gap-1 shadow-lg">
               <span>⭐</span> Featured
             </div>
           )}
           
+          {/* Like button */}
+          <button
+            onClick={handleLikeClick}
+            className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
+              isLiked 
+                ? 'bg-pink-500 text-white' 
+                : 'bg-black/40 backdrop-blur-sm text-white/70 hover:bg-black/60 hover:text-white'
+            }`}
+          >
+            {isLiked ? '❤️' : '🤍'}
+          </button>
+          
           {/* Item count badge */}
-          <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-lg">
-            {itemCount} items
+          <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-lg flex items-center gap-1.5">
+            <span>🖼️</span> {itemCount} items
+          </div>
+          
+          {/* Quick action on hover */}
+          <div className={`absolute bottom-3 left-3 transition-all duration-300 ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
+            <span className="bg-purple-600 text-white text-xs font-medium px-3 py-1.5 rounded-lg shadow-lg">
+              View Collection →
+            </span>
           </div>
         </div>
         
         {/* Content section */}
         <div className="p-4">
           <div className="flex items-start justify-between gap-2 mb-2">
-            <h4 className="font-bold text-white truncate flex items-center gap-1.5">
+            <h4 className="font-bold text-white truncate flex items-center gap-1.5 group-hover:text-purple-300 transition-colors">
               {name}
               {verified && (
                 <svg className="w-4 h-4 text-blue-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -113,30 +150,35 @@ export default function CollectionCard({
                 </svg>
               )}
             </h4>
+            {change24h !== undefined && (
+              <span className={`text-xs font-medium px-1.5 py-0.5 rounded ${change24h >= 0 ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>
+                {change24h >= 0 ? '+' : ''}{change24h}%
+              </span>
+            )}
           </div>
           
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-5 h-5 rounded-full bg-gradient-to-r from-purple-500 to-pink-500" />
-            <p className="text-sm text-gray-400">by {creator.slice(0, 6)}...{creator.slice(-4)}</p>
+            <div className="w-5 h-5 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 ring-2 ring-purple-500/20" />
+            <p className="text-sm text-gray-400">
+              by <span className="text-gray-300">{creator.slice(0, 6)}...{creator.slice(-4)}</span>
+            </p>
           </div>
           
           {/* Stats */}
-          {(floorPrice !== undefined || volume !== undefined) && (
-            <div className="flex justify-between items-center pt-3 border-t border-gray-700/50">
-              {floorPrice !== undefined && (
-                <div>
-                  <p className="text-xs text-gray-500">Floor</p>
-                  <p className="text-sm font-semibold text-purple-400">{floorPrice} STX</p>
-                </div>
-              )}
-              {volume !== undefined && (
-                <div className="text-right">
-                  <p className="text-xs text-gray-500">Volume</p>
-                  <p className="text-sm font-semibold text-white">{volume.toLocaleString()} STX</p>
-                </div>
-              )}
+          <div className="grid grid-cols-3 gap-2 pt-3 border-t border-gray-700/50">
+            <div>
+              <p className="text-xs text-gray-500 mb-0.5">Floor</p>
+              <p className="text-sm font-semibold text-purple-400">{floorPrice ?? '—'} STX</p>
             </div>
-          )}
+            <div className="text-center">
+              <p className="text-xs text-gray-500 mb-0.5">Volume</p>
+              <p className="text-sm font-semibold text-white">{displayVolume ? displayVolume.toLocaleString() : '—'}</p>
+            </div>
+            <div className="text-right">
+              <p className="text-xs text-gray-500 mb-0.5">Owners</p>
+              <p className="text-sm font-semibold text-gray-300">{owners ?? Math.floor(itemCount * 0.7)}</p>
+            </div>
+          </div>
         </div>
       </div>
     </Link>
