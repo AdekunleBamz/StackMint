@@ -103,18 +103,21 @@ function LoadingSpinnerComponent({
   };
 
   const content = (
-    <div className="flex flex-col items-center gap-3">
+    <div className="flex flex-col items-center gap-3" role="status" aria-label={text || 'Loading'}>
       {renderSpinner()}
       {text && (
         <p className="text-gray-400 text-sm animate-pulse">{text}</p>
       )}
+      <span className="sr-only">{text || 'Loading...'}</span>
     </div>
   );
 
   if (fullScreen) {
     return (
-      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
-        {content}
+      <div className="fixed inset-0 bg-gray-950/90 backdrop-blur-md flex items-center justify-center z-50">
+        <div className="flex flex-col items-center gap-4 p-8 rounded-2xl bg-gray-900/50 border border-gray-800/50">
+          {content}
+        </div>
       </div>
     );
   }
