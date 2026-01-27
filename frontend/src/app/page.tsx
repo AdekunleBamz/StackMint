@@ -1,4 +1,6 @@
-import { Suspense, lazy, type FC } from 'react';
+'use client';
+
+import { Suspense, lazy, type FC, useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Stats from '@/components/Stats';
@@ -12,7 +14,7 @@ import Footer from '@/components/Footer';
  * Home Page
  * Main landing page for StacksMint platform
  * @module pages/Home
- * @version 2.0.0
+ * @version 2.1.0
  */
 
 // Skeleton item count constants
@@ -24,6 +26,9 @@ const SKELETON_STAGGER_DELAY = 100;
 
 /** Skeleton pulse animation duration in ms */
 const SKELETON_PULSE_DURATION = 2000;
+
+/** Scroll threshold for showing scroll-to-top button */
+const SCROLL_THRESHOLD = 400;
 
 /**
  * Page section identifiers for navigation
@@ -233,9 +238,72 @@ function NFTShowcaseSection() {
   );
 }
 
+// Scroll to top button component
+function ScrollToTopButton() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > SCROLL_THRESHOLD) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <button
+      onClick={scrollToTop}
+      className={`fixed bottom-8 right-8 z-50 p-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white rounded-full shadow-lg shadow-orange-500/25 transition-all duration-300 group ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+      }`}
+      aria-label="Scroll to top"
+    >
+      <svg className="w-6 h-6 transform group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+  );
+}
+
+// Progress bar showing scroll position
+function ScrollProgressBar() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const updateProgress = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      setProgress(scrollPercent);
+    };
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    return () => window.removeEventListener('scroll', updateProgress);
+  }, []);
+
+  return (
+    <div className="fixed top-0 left-0 right-0 h-1 z-[100] bg-gray-900/50">
+      <div 
+        className="h-full bg-gradient-to-r from-orange-500 via-purple-500 to-pink-500 transition-all duration-150"
+        style={{ width: `${progress}%` }}
+      />
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <main className="relative min-h-screen">
+      <ScrollProgressBar />
       <BackgroundDecoration />
       
       {/* Content layers */}
@@ -277,16 +345,7 @@ export default function Home() {
         <Footer />
       </div>
 
-      {/* Scroll to top button - shows after scrolling */}
-      <button
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-8 right-8 z-50 p-3 bg-orange-500 hover:bg-orange-600 text-white rounded-full shadow-lg shadow-orange-500/25 opacity-0 hover:opacity-100 focus:opacity-100 transition-all duration-300 group"
-        aria-label="Scroll to top"
-      >
-        <svg className="w-6 h-6 transform group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
-      </button>
+      <ScrollToTopButton />
     </main>
   );
 }
