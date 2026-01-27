@@ -199,9 +199,12 @@ export function Modal({
         className={`relative w-full ${sizeClasses[size]} bg-gray-800 border border-gray-700/50 rounded-2xl shadow-2xl animate-slide-up ${className}`}
         tabIndex={-1}
       >
+        {/* Decorative gradient accent */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-t-2xl" />
+        
         {/* Header */}
         {(title || showClose) && (
-          <div className="flex items-start justify-between p-6 pb-0">
+          <div className="flex items-start justify-between p-6 pb-0 pt-5">
             <div>
               {title && (
                 <h2 
@@ -223,7 +226,7 @@ export function Modal({
             {showClose && (
               <button
                 onClick={onClose}
-                className="p-2 -mr-2 -mt-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="p-2 -mr-2 -mt-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 hover:rotate-90"
                 aria-label="Close modal"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
