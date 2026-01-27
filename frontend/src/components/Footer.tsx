@@ -41,15 +41,18 @@ const COMPANY_INFO = {
 // Newsletter form component
 function NewsletterForm() {
   return (
-    <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/20 border border-purple-500/20 rounded-2xl p-6">
-      <h4 className="text-white font-semibold mb-2 flex items-center gap-2">
-        <span className="text-lg">📧</span>
+    <div className="bg-gradient-to-br from-purple-900/30 to-pink-900/20 border border-purple-500/20 rounded-2xl p-6 relative overflow-hidden group">
+      {/* Glow effect */}
+      <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition-all duration-500" />
+      
+      <h4 className="text-white font-semibold mb-2 flex items-center gap-2 relative z-10">
+        <span className="text-lg animate-bounce-gentle">📧</span>
         Stay Updated
       </h4>
-      <p className="text-gray-400 text-sm mb-4">
+      <p className="text-gray-400 text-sm mb-4 relative z-10">
         Get the latest NFT drops and platform updates.
       </p>
-      <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
+      <form className="flex gap-2 relative z-10" onSubmit={(e) => e.preventDefault()}>
         <input
           type="email"
           placeholder="Enter your email"
@@ -57,7 +60,7 @@ function NewsletterForm() {
         />
         <button
           type="submit"
-          className="bg-purple-600 hover:bg-purple-500 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition-colors shrink-0"
+          className="bg-purple-600 hover:bg-purple-500 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition-all hover:scale-105 active:scale-95 shrink-0 shadow-lg shadow-purple-500/25"
         >
           Subscribe
         </button>
