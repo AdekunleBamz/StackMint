@@ -123,24 +123,37 @@ export default function Toast({
   };
 
   const style = styles[type];
+  
+  // Type-specific emojis for visual flair
+  const typeEmojis: Record<ToastType, string> = {
+    success: '✅',
+    error: '❌',
+    warning: '⚠️',
+    info: 'ℹ️',
+  };
 
   return (
     <div 
       className={`fixed bottom-4 right-4 max-w-sm w-full ${style.bg} backdrop-blur-xl border ${style.border} rounded-xl shadow-2xl overflow-hidden z-50 transition-all duration-300 ${
-        isExiting ? 'opacity-0 translate-x-full' : 'opacity-100 translate-x-0 animate-slide-up'
+        isExiting ? 'opacity-0 translate-x-full scale-95' : 'opacity-100 translate-x-0 animate-slide-up'
       }`}
+      role="alert"
+      aria-live="polite"
     >
       <div className="p-4">
         <div className="flex items-start gap-3">
           {/* Icon */}
-          <div className={`flex-shrink-0 w-8 h-8 rounded-lg ${style.icon} flex items-center justify-center`}>
+          <div className={`flex-shrink-0 w-8 h-8 rounded-lg ${style.icon} flex items-center justify-center shadow-lg`}>
             {icons[type]}
           </div>
           
           {/* Content */}
           <div className="flex-1 min-w-0">
             {title && (
-              <p className="font-semibold text-white mb-0.5">{title}</p>
+              <p className="font-semibold text-white mb-0.5 flex items-center gap-2">
+                <span>{typeEmojis[type]}</span>
+                {title}
+              </p>
             )}
             <p className="text-sm text-gray-200">{message}</p>
             
@@ -151,9 +164,9 @@ export default function Toast({
                   action.onClick();
                   handleClose();
                 }}
-                className="mt-2 text-sm font-medium text-purple-400 hover:text-purple-300 transition-colors"
+                className="mt-2 text-sm font-medium text-purple-400 hover:text-purple-300 transition-colors underline-offset-2 hover:underline"
               >
-                {action.label}
+                {action.label} →
               </button>
             )}
           </div>
@@ -161,7 +174,8 @@ export default function Toast({
           {/* Close button */}
           <button 
             onClick={handleClose}
-            className="flex-shrink-0 p-1 text-gray-400 hover:text-white rounded-lg hover:bg-white/10 transition-all"
+            className="flex-shrink-0 p-1 text-gray-400 hover:text-white rounded-lg hover:bg-white/10 transition-all hover:rotate-90 duration-200"
+            aria-label="Dismiss notification"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -173,7 +187,7 @@ export default function Toast({
       {/* Progress bar */}
       <div className="h-1 bg-black/30">
         <div 
-          className={`h-full transition-all duration-100 ${type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : type === 'warning' ? 'bg-yellow-500' : 'bg-purple-500'}`}
+          className={`h-full transition-all duration-100 ease-linear ${type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : type === 'warning' ? 'bg-yellow-500' : 'bg-purple-500'}`}
           style={{ width: `${progress}%` }}
         />
       </div>
