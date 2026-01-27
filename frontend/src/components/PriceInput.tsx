@@ -155,10 +155,10 @@ export default function PriceInput({
             type="button"
             onClick={() => handleQuickAmount(amount)}
             disabled={disabled}
-            className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+            className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 ${
               parseFloat(value) === amount
-                ? 'bg-purple-600 text-white'
-                : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed'
+                ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/25 scale-105'
+                : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed'
             }`}
           >
             {amount} STX
@@ -168,9 +168,9 @@ export default function PriceInput({
           type="button"
           onClick={() => onChange('')}
           disabled={disabled || !value}
-          className="px-3 py-1.5 text-xs font-medium rounded-lg bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all ml-auto"
+          className="px-3 py-1.5 text-xs font-medium rounded-lg bg-gray-800 text-gray-400 hover:bg-red-900/50 hover:text-red-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 ml-auto"
         >
-          Clear
+          ✕ Clear
         </button>
       </div>
 
