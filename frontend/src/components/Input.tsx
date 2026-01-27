@@ -41,17 +41,18 @@ const sizeStyles: Record<InputSize, string> = {
 };
 
 const baseInputStyles = `
-  w-full bg-gray-900 border rounded-lg text-white 
+  w-full bg-gray-900/80 border rounded-xl text-white 
   placeholder-gray-500 
-  transition-all duration-200
-  focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent
-  disabled:opacity-50 disabled:cursor-not-allowed
+  transition-all duration-300
+  focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 focus:bg-gray-900
+  hover:bg-gray-900 hover:border-gray-600
+  disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-gray-900/80 disabled:hover:border-gray-700
 `;
 
 const getInputStyles = (hasError: boolean, hasLeftElement: boolean, hasRightElement: boolean, size: InputSize) => {
   let styles = baseInputStyles + ' ' + sizeStyles[size];
   
-  styles += hasError ? ' border-red-500' : ' border-gray-700 hover:border-gray-600';
+  styles += hasError ? ' border-red-500 focus:ring-red-500/50 focus:border-red-500' : ' border-gray-700';
   
   if (hasLeftElement) styles += ' pl-10';
   if (hasRightElement) styles += ' pr-10';
