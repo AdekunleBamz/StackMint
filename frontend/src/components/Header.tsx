@@ -4,14 +4,13 @@
  * Header Component
  * Main navigation header with wallet connection and mobile menu
  * @module Header
- * @version 3.0.0
+ * @version 3.1.0
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useWallet } from '@/hooks/useWallet';
-import WalletConnectQRModal from './WalletConnectQRModal';
 
 // Scroll detection threshold
 const SCROLL_THRESHOLD = 20;
@@ -38,12 +37,30 @@ interface NavLinkConfig {
   ariaLabel: string;
 }
 
+/**
+ * Search suggestion type
+ */
+interface SearchSuggestion {
+  id: string;
+  type: 'collection' | 'nft' | 'user';
+  title: string;
+  subtitle?: string;
+  image?: string;
+}
+
 export default function Header() {
   const { address, connect, connectWalletConnect, disconnect, isConnected, connecting, wcUri, showQRModal, closeQRModal } = useWallet();
   const [showWalletMenu, setShowWalletMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchFocused, setSearchFocused] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(3);
+  const [showNotifications, setShowNotifications] = useState(false);
   const walletMenuRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const notificationRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   // Handle scroll effect
@@ -65,13 +82,19 @@ export default function Header() {
       if (walletMenuRef.current && !walletMenuRef.current.contains(event.target as Node)) {
         setShowWalletMenu(false);
       }
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setSearchFocused(false);
+      }
+      if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
+        setShowNotifications(false);
+      }
     };
 
-    if (showWalletMenu) {
+    if (showWalletMenu || searchFocused || showNotifications) {
       document.addEventListener('mousedown', handleClickOutside);
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }
-  }, [showWalletMenu]);
+  }, [showWalletMenu, searchFocused, showNotifications]);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -184,8 +207,133 @@ export default function Header() {
             </div>
           </button>
 
-          {/* Wallet Connection */}
-          <div className="hidden md:block" ref={walletMenuRef}>
+          {/* Right side controls */}
+          <div className="hidden md:flex items-center gap-3">
+            {/* Search Bar */}
+            <div className="relative" ref={searchRef}>
+              <div className={`flex items-center transition-all duration-300 ${
+                searchFocused 
+                  ? 'w-64 bg-gray-800 border-purple-500/50' 
+                  : 'w-48 bg-gray-800/50 border-gray-700/50'
+              } border rounded-full`}>
+                <svg 
+                  className="w-4 h-4 ml-3 text-gray-400" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search NFTs..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => setSearchFocused(true)}
+                  className="w-full px-3 py-2 bg-transparent text-sm text-white placeholder-gray-500 focus:outline-none"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="mr-2 p-1 text-gray-400 hover:text-white"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                )}
+              </div>
+
+              {/* Search Dropdown */}
+              {searchFocused && searchQuery && (
+                <div className="absolute top-full mt-2 w-full bg-gray-900 border border-gray-800 rounded-xl shadow-2xl overflow-hidden z-50 animate-fade-in-down">
+                  <div className="p-2">
+                    <p className="text-xs text-gray-500 px-2 pb-2">Quick results</p>
+                    <Link
+                      href={`/marketplace?search=${encodeURIComponent(searchQuery)}`}
+                      className="flex items-center gap-3 p-2 hover:bg-gray-800 rounded-lg transition-colors"
+                    >
+                      <span className="text-lg">🔍</span>
+                      <span className="text-sm text-gray-300">Search for "{searchQuery}"</span>
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Notification Bell */}
+            <div className="relative" ref={notificationRef}>
+              <button
+                onClick={() => setShowNotifications(!showNotifications)}
+                className="relative p-2.5 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all"
+                aria-label={`Notifications${notificationCount > 0 ? ` (${notificationCount} unread)` : ''}`}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+                {notificationCount > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white text-xs flex items-center justify-center rounded-full animate-pulse">
+                    {notificationCount}
+                  </span>
+                )}
+              </button>
+
+              {/* Notification Dropdown */}
+              {showNotifications && (
+                <div className="absolute right-0 top-full mt-2 w-80 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl overflow-hidden z-50 animate-fade-in-down">
+                  <div className="p-3 border-b border-gray-800 flex items-center justify-between">
+                    <h3 className="font-semibold text-white">Notifications</h3>
+                    <button 
+                      onClick={() => setNotificationCount(0)}
+                      className="text-xs text-purple-400 hover:text-purple-300"
+                    >
+                      Mark all read
+                    </button>
+                  </div>
+                  <div className="max-h-80 overflow-y-auto">
+                    <div className="p-3 hover:bg-gray-800/50 border-b border-gray-800/50 transition-colors">
+                      <div className="flex gap-3">
+                        <span className="text-2xl">🎉</span>
+                        <div>
+                          <p className="text-sm text-white">Your NFT was sold!</p>
+                          <p className="text-xs text-gray-400">CryptoPunk #3429 sold for 50 STX</p>
+                          <p className="text-xs text-gray-500 mt-1">2 hours ago</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-3 hover:bg-gray-800/50 border-b border-gray-800/50 transition-colors">
+                      <div className="flex gap-3">
+                        <span className="text-2xl">💰</span>
+                        <div>
+                          <p className="text-sm text-white">New offer received</p>
+                          <p className="text-xs text-gray-400">25 STX offer on Bored Ape #7821</p>
+                          <p className="text-xs text-gray-500 mt-1">5 hours ago</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-3 hover:bg-gray-800/50 transition-colors">
+                      <div className="flex gap-3">
+                        <span className="text-2xl">✨</span>
+                        <div>
+                          <p className="text-sm text-white">NFT minted successfully</p>
+                          <p className="text-xs text-gray-400">Your new NFT is now live</p>
+                          <p className="text-xs text-gray-500 mt-1">1 day ago</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <Link 
+                    href="/profile?tab=notifications"
+                    className="block p-3 text-center text-sm text-purple-400 hover:bg-gray-800/50 border-t border-gray-800 transition-colors"
+                  >
+                    View all notifications
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Wallet Connection */}
+          <div ref={walletMenuRef}>
             {isConnected ? (
               <div className="flex items-center gap-3">
                 <Link 
@@ -265,6 +413,7 @@ export default function Header() {
                 )}
               </div>
             )}
+          </div>
           </div>
         </div>
 
@@ -363,11 +512,6 @@ export default function Header() {
           </div>
         </div>
       </header>
-      
-      {/* WalletConnect QR Modal */}
-      {showQRModal && wcUri && (
-        <WalletConnectQRModal uri={wcUri} onClose={closeQRModal} />
-      )}
     </>
   );
 }
