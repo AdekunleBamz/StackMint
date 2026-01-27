@@ -272,18 +272,19 @@ export function Tooltip({
   const tooltipContent = isVisible && position && (
     <div
       ref={tooltipRef}
-      className={`fixed z-[100] px-3 py-2 text-sm text-white bg-gray-900 border border-gray-700 rounded-lg shadow-xl animate-fade-in ${className}`}
+      className={`fixed z-[100] px-3 py-2 text-sm text-white bg-gray-900/95 backdrop-blur-sm border border-gray-700/50 rounded-lg shadow-xl shadow-black/50 animate-fade-in ${className}`}
       style={{
         top: position.top,
         left: position.left,
         maxWidth: typeof maxWidth === 'number' ? `${maxWidth}px` : maxWidth,
       }}
       role="tooltip"
+      aria-hidden={!isVisible}
     >
-      {content}
+      <div className="relative z-10">{content}</div>
       {arrow && (
         <div
-          className="absolute w-2 h-2 bg-gray-900 border-gray-700"
+          className="absolute w-2 h-2 bg-gray-900/95 border-gray-700/50"
           style={{
             ...arrowStyles[position.placement],
             borderWidth: position.placement === 'top' || position.placement === 'left' ? '0 1px 1px 0' : '1px 0 0 1px',
