@@ -110,22 +110,27 @@ export default function FilterTabs({
 
   if (variant === 'pills') {
     return (
-      <div className="flex gap-3 flex-wrap">
+      <div className="flex gap-3 flex-wrap" role="tablist" aria-label="Filter options">
         {normalizedTabs.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => handleSelect(tab.id)}
+            onClick={() => !tab.disabled && handleSelect(tab.id)}
+            disabled={tab.disabled}
+            role="tab"
+            aria-selected={active === tab.id}
             className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-              active === tab.id 
-                ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg shadow-purple-500/25' 
-                : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700 hover:text-white border border-gray-700/50'
+              tab.disabled 
+                ? 'bg-gray-800/30 text-gray-600 cursor-not-allowed'
+                : active === tab.id 
+                  ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg shadow-purple-500/25 scale-105' 
+                  : 'bg-gray-800/50 text-gray-400 hover:bg-gray-700 hover:text-white border border-gray-700/50 hover:scale-105'
             }`}
           >
             <span className="flex items-center gap-2">
-              {tab.icon && <span>{tab.icon}</span>}
+              {tab.icon && <span className="text-base">{tab.icon}</span>}
               {tab.label}
               {tab.count !== undefined && (
-                <span className={`text-xs px-1.5 py-0.5 rounded-full ${
+                <span className={`text-xs px-1.5 py-0.5 rounded-full min-w-[1.25rem] text-center ${
                   active === tab.id ? 'bg-white/20' : 'bg-gray-600'
                 }`}>
                   {tab.count}
@@ -140,22 +145,27 @@ export default function FilterTabs({
 
   // Default variant
   return (
-    <div className="inline-flex gap-1 bg-gray-900/50 p-1 rounded-xl border border-gray-700/50">
+    <div className="inline-flex gap-1 bg-gray-900/50 p-1 rounded-xl border border-gray-700/50" role="tablist" aria-label="Filter options">
       {normalizedTabs.map((tab) => (
         <button
           key={tab.id}
-          onClick={() => handleSelect(tab.id)}
+          onClick={() => !tab.disabled && handleSelect(tab.id)}
+          disabled={tab.disabled}
+          role="tab"
+          aria-selected={active === tab.id}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-            active === tab.id 
-              ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/25' 
-              : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+            tab.disabled 
+              ? 'text-gray-600 cursor-not-allowed'
+              : active === tab.id 
+                ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/25' 
+                : 'text-gray-400 hover:bg-gray-800 hover:text-white'
           }`}
         >
           <span className="flex items-center gap-2">
-            {tab.icon && <span>{tab.icon}</span>}
+            {tab.icon && <span className="text-base">{tab.icon}</span>}
             {tab.label}
             {tab.count !== undefined && (
-              <span className={`text-xs px-1.5 py-0.5 rounded-full ${
+              <span className={`text-xs px-1.5 py-0.5 rounded-full min-w-[1.25rem] text-center ${
                 active === tab.id ? 'bg-white/20' : 'bg-gray-700'
               }`}>
                 {tab.count}
