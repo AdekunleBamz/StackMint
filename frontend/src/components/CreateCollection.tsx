@@ -86,28 +86,35 @@ export default function CreateCollection() {
         </div>
 
         {/* Progress Steps */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between relative">
+          <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-700 -z-10" />
+          <div 
+            className="absolute top-1/2 left-0 h-0.5 bg-gradient-to-r from-purple-600 to-pink-600 -z-10 transition-all duration-500 ease-out" 
+            style={{ width: `${(currentStep / (steps.length - 1)) * 100}%` }}
+          />
+          
           {steps.map((step, index) => (
-            <div key={step} className="flex items-center">
-              <div className={`flex items-center gap-2 ${index <= currentStep ? 'text-purple-400' : 'text-gray-500'}`}>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                  index < currentStep ? 'bg-purple-600 text-white' :
-                  index === currentStep ? 'bg-purple-600/20 border-2 border-purple-600 text-purple-400' :
-                  'bg-gray-700 text-gray-500'
-                }`}>
-                  {index < currentStep ? (
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  ) : (
-                    index + 1
-                  )}
-                </div>
-                <span className="text-sm font-medium hidden sm:inline">{step}</span>
+            <div key={step} className="flex flex-col items-center gap-2 group cursor-default">
+              <div 
+                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 z-10 ${
+                  index < currentStep ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white scale-110 shadow-lg shadow-purple-500/30' :
+                  index === currentStep ? 'bg-gray-900 border-2 border-purple-500 text-purple-400 scale-110 ring-4 ring-purple-500/20' :
+                  'bg-gray-800 border-2 border-gray-700 text-gray-500'
+                }`}
+              >
+                {index < currentStep ? (
+                  <svg className="w-4 h-4 animate-scale-in" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                ) : (
+                  index + 1
+                )}
               </div>
-              {index < steps.length - 1 && (
-                <div className={`w-12 sm:w-24 h-0.5 mx-2 ${index < currentStep ? 'bg-purple-600' : 'bg-gray-700'}`} />
-              )}
+              <span className={`text-xs font-medium transition-colors duration-300 ${
+                index <= currentStep ? 'text-purple-300' : 'text-gray-500'
+              }`}>
+                {step}
+              </span>
             </div>
           ))}
         </div>
