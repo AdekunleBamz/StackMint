@@ -4,10 +4,10 @@
  * Header Component
  * Main navigation header with wallet connection and mobile menu
  * @module Header
- * @version 2.2.0
+ * @version 3.0.0
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useWallet } from '@/hooks/useWallet';
@@ -21,6 +21,9 @@ const HEADER_HEIGHT = 80;
 
 /** Mobile menu breakpoint */
 const MOBILE_BREAKPOINT = 768;
+
+/** Animation duration for menu transitions */
+const MENU_ANIMATION_DURATION = 200;
 
 // Wallet connection types
 type WalletConnectionType = 'stacks' | 'walletconnect';
@@ -40,18 +43,47 @@ export default function Header() {
   const [showWalletMenu, setShowWalletMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const walletMenuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
+  // Handle scroll effect
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > SCROLL_THRESHOLD);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
+    setShowWalletMenu(false);
   }, [pathname]);
+
+  // Close wallet menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (walletMenuRef.current && !walletMenuRef.current.contains(event.target as Node)) {
+        setShowWalletMenu(false);
+      }
+    };
+
+    if (showWalletMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [showWalletMenu]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
   
   const handleConnect = (type: 'stacks' | 'walletconnect') => {
     setShowWalletMenu(false);
@@ -71,67 +103,108 @@ export default function Header() {
 
   const isActive = (href: string) => pathname === href;
 
+  const handleMobileMenuToggle = useCallback(() => {
+    setMobileMenuOpen(prev => !prev);
+  }, []);
+
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-black/90 backdrop-blur-xl border-b border-purple-500/20 py-3' 
-          : 'bg-transparent py-4'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-2xl group-hover:scale-110 transition-transform">💎</span>
-            <span className="text-xl font-bold text-white">StacksMint</span>
+      <header 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled 
+            ? 'bg-gray-900/95 backdrop-blur-xl border-b border-purple-500/20 py-3 shadow-lg shadow-black/10' 
+            : 'bg-transparent py-4'
+        }`}
+        role="banner"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          {/* Logo */}
+          <Link 
+            href="/" 
+            className="flex items-center gap-2.5 group"
+            aria-label="StacksMint Home"
+          >
+            <span className="text-2xl group-hover:scale-110 transition-transform duration-300">💎</span>
+            <span className="text-xl font-bold text-white group-hover:text-purple-300 transition-colors">
+              StacksMint
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex gap-1 bg-gray-900/50 rounded-full px-2 py-1 border border-gray-700/50">
+          <nav 
+            className="hidden md:flex gap-1 bg-gray-900/50 backdrop-blur-sm rounded-full px-2 py-1.5 border border-gray-700/50"
+            role="navigation"
+            aria-label="Main navigation"
+          >
             {navLinks.map((link) => (
               <Link 
                 key={link.href}
                 href={link.href} 
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                aria-label={link.ariaLabel}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   isActive(link.href)
                     ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/25'
-                    : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                    : 'text-gray-300 hover:text-white hover:bg-gray-800/70'
                 }`}
               >
-                {link.label}
+                <span className="relative z-10">{link.label}</span>
+                {isActive(link.href) && (
+                  <span className="absolute inset-0 bg-gradient-to-r from-purple-600 to-purple-700 rounded-full animate-pulse-glow" />
+                )}
               </Link>
             ))}
           </nav>
 
           {/* Mobile Menu Button */}
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-gray-400 hover:text-white"
-            aria-label="Toggle menu"
+            onClick={handleMobileMenuToggle}
+            className="md:hidden relative p-2.5 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all duration-200"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {mobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
+            <span className="sr-only">{mobileMenuOpen ? 'Close menu' : 'Open menu'}</span>
+            <div className="w-5 h-5 relative">
+              <span 
+                className={`absolute left-0 block w-5 h-0.5 bg-current transform transition-all duration-300 ${
+                  mobileMenuOpen ? 'top-2 rotate-45' : 'top-1'
+                }`}
+              />
+              <span 
+                className={`absolute left-0 top-2 block w-5 h-0.5 bg-current transition-all duration-200 ${
+                  mobileMenuOpen ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
+                }`}
+              />
+              <span 
+                className={`absolute left-0 block w-5 h-0.5 bg-current transform transition-all duration-300 ${
+                  mobileMenuOpen ? 'top-2 -rotate-45' : 'top-3'
+                }`}
+              />
+            </div>
           </button>
 
           {/* Wallet Connection */}
-          <div className="hidden md:block">
+          <div className="hidden md:block" ref={walletMenuRef}>
             {isConnected ? (
               <div className="flex items-center gap-3">
                 <Link 
                   href="/profile" 
-                  className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-full transition-colors"
+                  className="flex items-center gap-2.5 bg-gray-800/80 hover:bg-gray-700/80 px-4 py-2.5 rounded-full transition-all duration-200 border border-gray-700/50 hover:border-gray-600/50 group"
                 >
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500" />
-                  <span className="text-sm text-gray-300">{address?.slice(0, 6)}...{address?.slice(-4)}</span>
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 ring-2 ring-purple-500/20 group-hover:ring-purple-500/40 transition-all" />
+                  <span className="text-sm text-gray-300 font-medium group-hover:text-white transition-colors">
+                    {address?.slice(0, 6)}...{address?.slice(-4)}
+                  </span>
                 </Link>
                 <button 
                   onClick={disconnect}
-                  className="bg-gray-800 hover:bg-red-600/20 hover:text-red-400 text-gray-400 px-4 py-2 rounded-full text-sm transition-all"
+                  className="p-2.5 bg-gray-800/80 hover:bg-red-600/20 text-gray-400 hover:text-red-400 rounded-full transition-all duration-200 border border-gray-700/50 hover:border-red-500/30"
+                  aria-label="Disconnect wallet"
                 >
-                  Disconnect
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                  </svg>
                 </button>
               </div>
             ) : (
