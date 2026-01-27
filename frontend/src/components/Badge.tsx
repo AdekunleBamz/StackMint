@@ -91,18 +91,19 @@ export function Badge({
   return (
     <span
       className={`
-        inline-flex items-center gap-1.5 font-medium border
+        inline-flex items-center gap-1.5 font-medium border transition-all duration-200 hover:scale-105
         ${variantStyles[variant]}
         ${sizeStyles[size]}
         ${rounded ? 'rounded-full' : 'rounded-md'}
         ${className}
       `}
+      role="status"
     >
       {dot && (
-        <span className={`w-1.5 h-1.5 rounded-full ${dotColors[variant]}`} />
+        <span className={`w-1.5 h-1.5 rounded-full ${dotColors[variant]} ${variant === 'success' || variant === 'info' ? 'animate-pulse' : ''}`} />
       )}
       
-      {icon && <span className="w-3.5 h-3.5">{icon}</span>}
+      {icon && <span className="w-3.5 h-3.5 flex-shrink-0">{icon}</span>}
       
       {children}
       
@@ -110,7 +111,7 @@ export function Badge({
         <button
           type="button"
           onClick={onRemove}
-          className="ml-1 -mr-1 p-0.5 hover:bg-white/10 rounded-full transition-colors"
+          className="ml-1 -mr-1 p-0.5 hover:bg-white/20 rounded-full transition-all duration-200 hover:rotate-90"
           aria-label="Remove"
         >
           <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
