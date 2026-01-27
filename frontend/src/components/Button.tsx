@@ -157,6 +157,42 @@ function LoadingSpinner({ size }: { size: ButtonSize }) {
 }
 
 // ============================================================================
+// Ripple Effect Hook
+// ============================================================================
+
+function useRipple() {
+  const createRipple = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const button = event.currentTarget;
+    const rect = button.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    const ripple = document.createElement('span');
+    ripple.style.cssText = `
+      position: absolute;
+      width: ${size}px;
+      height: ${size}px;
+      left: ${x}px;
+      top: ${y}px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple 0.6s ease-out forwards;
+      pointer-events: none;
+    `;
+    
+    button.style.position = 'relative';
+    button.style.overflow = 'hidden';
+    button.appendChild(ripple);
+    
+    setTimeout(() => ripple.remove(), 600);
+  };
+  
+  return createRipple;
+}
+
+// ============================================================================
 // Button Component
 // ============================================================================
 
@@ -179,12 +215,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const disabled = isDisabled || isLoading;
+    const createRipple = useRipple();
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (!disabled && variant === 'primary') {
+        createRipple(e);
+      }
+      props.onClick?.(e);
+    };
 
     const classes = `
       inline-flex items-center justify-center
       font-medium transition-all duration-200
       focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900
       disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none
+      active:scale-[0.98]
       ${variantStyles[variant]}
       ${sizeStyles[size]}
       ${roundedStyles[rounded]}
@@ -197,6 +242,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         disabled={disabled}
+        onClick={handleClick}
         className={classes}
         aria-busy={isLoading}
         {...props}
