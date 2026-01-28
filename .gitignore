@@ -3,12 +3,6 @@ Clarinet.toml
 testnet.toml
 devnet.toml
 
-# Sensitive files
-wallets.json
-*.mnemonic
-*.key
-*.secret
-
 # Node modules
 node_modules/
 
