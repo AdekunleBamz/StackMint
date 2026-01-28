@@ -8,8 +8,6 @@ wallets.json
 *.mnemonic
 *.key
 *.secret
-*-results.json
-*-results-*.json
 
 # Node modules
 node_modules/
@@ -35,6 +33,3 @@ Thumbs.db
 
 # Settings
 settings/
-
-# Personal tools
-scripts/
