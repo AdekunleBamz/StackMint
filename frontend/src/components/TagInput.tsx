@@ -177,7 +177,7 @@ function TagInputComponent({
  * Tag Component for standalone use
  */
 interface TagProps {
-  children: string;
+  children: React.ReactNode;
   variant?: 'default' | 'success' | 'warning' | 'error' | 'info';
   size?: 'sm' | 'md' | 'lg';
   removable?: boolean;

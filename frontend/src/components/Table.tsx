@@ -321,6 +321,7 @@ interface NFTActivity {
   to: string;
   price?: number;
   timestamp: Date;
+  [key: string]: unknown;
 }
 
 interface ActivityTableProps {

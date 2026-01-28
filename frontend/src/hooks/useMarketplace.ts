@@ -8,7 +8,7 @@
  */
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { useWallet } from '@/context/WalletContext';
+import { useWallet } from '@/hooks/useWallet';
 
 // Types
 export interface Listing {

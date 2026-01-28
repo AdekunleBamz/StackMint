@@ -7,6 +7,8 @@
  * @version 1.0.0
  */
 
+import { useState } from 'react';
+
 interface SocialLink {
   platform: 'twitter' | 'discord' | 'website' | 'instagram' | 'youtube' | 'telegram' | 'github' | 'medium';
   url: string;

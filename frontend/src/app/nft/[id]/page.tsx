@@ -80,9 +80,9 @@ export default function NFTPage() {
   };
 
   const tabs = [
-    { id: 'details', label: 'Details', icon: '📋' },
+    { id: 'details', label: 'Details', icon: '📋', count: undefined },
     { id: 'attributes', label: 'Attributes', icon: '✨', count: nft.attributes.length },
-    { id: 'activity', label: 'Activity', icon: '📜' },
+    { id: 'activity', label: 'Activity', icon: '📜', count: undefined },
   ] as const;
 
   return (

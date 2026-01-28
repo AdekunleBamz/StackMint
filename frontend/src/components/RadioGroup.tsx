@@ -33,22 +33,22 @@ interface RadioGroupProps<T = string> {
 }
 
 // Context
-interface RadioContextType<T = string> {
+interface RadioContextType {
   name: string;
-  value: T;
-  onChange: (value: T) => void;
-  variant: RadioGroupProps['variant'];
-  size: RadioGroupProps['size'];
+  value: string;
+  onChange: (value: string) => void;
+  variant: 'default' | 'buttons' | 'cards';
+  size: 'sm' | 'md' | 'lg';
 }
 
 const RadioContext = createContext<RadioContextType | null>(null);
 
-function useRadioContext<T>() {
+function useRadioContext() {
   const context = useContext(RadioContext);
   if (!context) {
     throw new Error('Radio components must be used within RadioGroup');
   }
-  return context as RadioContextType<T>;
+  return context;
 }
 
 // Size configurations
@@ -94,7 +94,7 @@ export function RadioGroup<T extends string>({
   const config = sizeConfig[size];
 
   return (
-    <RadioContext.Provider value={{ name, value, onChange, variant, size } as RadioContextType}>
+    <RadioContext.Provider value={{ name, value, onChange: onChange as (value: string) => void, variant, size }}>
       <fieldset className={className}>
         {label && (
           <legend className="text-white font-medium mb-3">{label}</legend>
@@ -128,14 +128,14 @@ interface RadioItemProps<T = string> {
 }
 
 function RadioItem<T extends string>({ option }: RadioItemProps<T>) {
-  const { name, value, onChange, variant, size } = useRadioContext<T>();
+  const { name, value, onChange, variant, size } = useRadioContext();
   const config = sizeConfig[size || 'md'];
   const isSelected = value === option.value;
   const isDisabled = option.disabled;
 
   const handleChange = () => {
     if (!isDisabled) {
-      onChange(option.value);
+      onChange(option.value as string);
     }
   };
 
