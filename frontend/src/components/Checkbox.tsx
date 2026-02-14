@@ -83,15 +83,15 @@ export function Checkbox({
         {/* Custom checkbox */}
         <span
           className={`
-            ${config.box} shrink-0 rounded
+            ${config.box} shrink-0 rounded-lg
             flex items-center justify-center
-            border-2 transition-all
+            border-2 transition-all duration-200
             ${checked || indeterminate
-              ? 'bg-purple-500 border-purple-500'
-              : 'border-zinc-600 bg-transparent'
+              ? 'bg-gradient-to-br from-purple-500 to-purple-600 border-purple-500 shadow-lg shadow-purple-500/30'
+              : 'border-gray-600 bg-gray-800/50 hover:border-gray-500 hover:bg-gray-700'
             }
-            ${!disabled && !checked && !indeterminate ? 'hover:border-zinc-500' : ''}
-            ${error ? 'border-red-500' : ''}
+            ${error ? 'border-red-500 bg-red-500/10' : ''}
+            ${!disabled && (checked || indeterminate) ? 'hover:shadow-lg hover:shadow-purple-500/40' : ''}
           `}
         >
           {indeterminate ? (
