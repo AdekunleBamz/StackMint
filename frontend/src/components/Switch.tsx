@@ -94,11 +94,11 @@ export function Switch({
         onKeyDown={handleKeyDown}
         className={`
           relative inline-flex shrink-0 rounded-full
-          transition-colors duration-200 ease-in-out
+          transition-all duration-300 ease-in-out
           focus:outline-none focus:ring-2 focus:ring-purple-500/50
           ${config.track}
-          ${checked ? activeColor : 'bg-zinc-600'}
-          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+          ${checked ? `${activeColor} shadow-lg shadow-purple-500/30` : 'bg-gray-700 shadow-inner'}
+          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:shadow-md'}
         `}
       >
         {/* Thumb */}
