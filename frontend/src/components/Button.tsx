@@ -69,38 +69,44 @@ const variantStyles: Record<ButtonVariant, string> = {
     bg-gradient-to-r from-orange-500 to-orange-600 
     hover:from-orange-600 hover:to-orange-700 
     text-white shadow-lg shadow-orange-500/25 
-    hover:shadow-orange-500/40 
+    hover:shadow-orange-500/40 hover:scale-105
     border border-orange-500/50
-    active:from-orange-700 active:to-orange-800
+    active:from-orange-700 active:to-orange-800 active:scale-95
+    transition-all duration-200 ease-out
   `,
   secondary: `
     bg-gray-800 hover:bg-gray-700 
     text-white border border-gray-700 
-    hover:border-gray-600
-    active:bg-gray-900
+    hover:border-gray-600 hover:scale-105
+    active:bg-gray-900 active:scale-95
+    transition-all duration-200 ease-out
   `,
   outline: `
     bg-transparent hover:bg-white/5 
     text-white border border-gray-600 
-    hover:border-gray-500
-    active:bg-white/10
+    hover:border-gray-500 hover:scale-105
+    active:bg-white/10 active:scale-95
+    transition-all duration-200 ease-out
   `,
   ghost: `
     bg-transparent hover:bg-white/10 
-    text-gray-300 hover:text-white
-    active:bg-white/20
+    text-gray-300 hover:text-white hover:scale-105
+    active:bg-white/20 active:scale-95
+    transition-all duration-200 ease-out
   `,
   danger: `
     bg-red-500 hover:bg-red-600 
     text-white shadow-lg shadow-red-500/25 
-    border border-red-500/50
-    active:bg-red-700
+    border border-red-500/50 hover:scale-105
+    active:bg-red-700 active:scale-95
+    transition-all duration-200 ease-out
   `,
   success: `
     bg-green-500 hover:bg-green-600 
     text-white shadow-lg shadow-green-500/25 
-    border border-green-500/50
-    active:bg-green-700
+    border border-green-500/50 hover:scale-105
+    active:bg-green-700 active:scale-95
+    transition-all duration-200 ease-out
   `,
 };
 
