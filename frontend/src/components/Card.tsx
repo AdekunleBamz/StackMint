@@ -58,11 +58,11 @@ interface CardLinkProps extends CardBaseProps {
 // ============================================================================
 
 const variantStyles: Record<CardVariant, string> = {
-  default: 'bg-gray-800/50 border border-gray-700/50',
-  elevated: 'bg-gray-800 shadow-xl shadow-black/20 border border-gray-700/30',
-  outlined: 'bg-transparent border-2 border-gray-700',
-  filled: 'bg-gray-800 border border-transparent',
-  gradient: 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50',
+  default: 'bg-gray-800/50 border border-gray-700/50 hover:bg-gray-800/70',
+  elevated: 'bg-gray-800 shadow-xl shadow-black/20 border border-gray-700/30 hover:shadow-2xl hover:shadow-black/40',
+  outlined: 'bg-transparent border-2 border-gray-700 hover:border-gray-600 hover:bg-gray-800/20',
+  filled: 'bg-gray-800 border border-transparent hover:bg-gray-700',
+  gradient: 'bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 hover:from-gray-700 hover:to-gray-800',
 };
 
 const paddingStyles: Record<CardPadding, string> = {
@@ -72,8 +72,8 @@ const paddingStyles: Record<CardPadding, string> = {
   lg: 'p-6 sm:p-8',
 };
 
-const hoverStyles = 'transition-all duration-300 hover:border-gray-600 hover:shadow-lg hover:shadow-black/30 hover:-translate-y-1';
-const clickableStyles = 'cursor-pointer';
+const hoverStyles = 'transition-all duration-200 hover:shadow-lg hover:shadow-purple-500/10 hover:scale-105';
+const clickableStyles = 'cursor-pointer active:scale-95';
 
 // ============================================================================
 // Card Component
