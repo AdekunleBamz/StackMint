@@ -18,6 +18,7 @@ interface InputBaseProps {
   label?: string;
   error?: string;
   hint?: string;
+  isValid?: boolean;
   leftElement?: ReactNode;
   rightElement?: ReactNode;
   inputSize?: InputSize;
@@ -43,16 +44,22 @@ const sizeStyles: Record<InputSize, string> = {
 const baseInputStyles = `
   w-full bg-gray-900/80 border rounded-xl text-white 
   placeholder-gray-500 
-  transition-all duration-300
+  transition-all duration-200
   focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 focus:bg-gray-900
   hover:bg-gray-900 hover:border-gray-600
   disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-gray-900/80 disabled:hover:border-gray-700
 `;
 
-const getInputStyles = (hasError: boolean, hasLeftElement: boolean, hasRightElement: boolean, size: InputSize) => {
+const getInputStyles = (hasError: boolean, isValid: boolean, hasLeftElement: boolean, hasRightElement: boolean, size: InputSize) => {
   let styles = baseInputStyles + ' ' + sizeStyles[size];
   
-  styles += hasError ? ' border-red-500 focus:ring-red-500/50 focus:border-red-500' : ' border-gray-700';
+  if (hasError) {
+    styles += ' border-red-500 focus:ring-red-500/50 focus:border-red-500 bg-red-950/20';
+  } else if (isValid) {
+    styles += ' border-green-500 focus:ring-green-500/50 focus:border-green-500 bg-green-950/20';
+  } else {
+    styles += ' border-gray-700';
+  }
   
   if (hasLeftElement) styles += ' pl-10';
   if (hasRightElement) styles += ' pr-10';
@@ -70,6 +77,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       label,
       error,
       hint,
+      isValid = false,
       leftElement,
       rightElement,
       inputSize = 'md',
@@ -105,11 +113,25 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <input
             ref={ref}
             id={inputId}
-            className={`${getInputStyles(hasError, !!leftElement, !!rightElement, inputSize)} ${className}`}
+            className={`${getInputStyles(hasError, isValid && !hasError, !!leftElement, !!rightElement, inputSize)} ${className}`}
             aria-invalid={hasError}
             aria-describedby={error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined}
             {...props}
           />
+          
+          {!rightElement && (hasError || (isValid && !hasError)) && (
+            <div className={`absolute right-3 top-1/2 -translate-y-1/2 ${hasError ? 'text-red-500' : 'text-green-500'}`}>
+              {hasError ? (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M18.101 12.93a1 1 0 00-1.415-1.414L11 16.586V4a1 1 0 10-2 0v12.586L3.314 11.516a1 1 0 00-1.415 1.414l9 9a1 1 0 001.415 0l9-9z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5 animate-in fade-in duration-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              )}
+            </div>
+          )}
           
           {rightElement && (
             <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
@@ -119,8 +141,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         </div>
         
         {error && (
-          <p id={`${inputId}-error`} className="mt-2 text-sm text-red-400 flex items-center gap-1">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <p id={`${inputId}-error`} className="mt-2 text-sm text-red-400 flex items-center gap-1 animate-in fade-in duration-200">
+            <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             {error}
@@ -149,6 +171,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       label,
       error,
       hint,
+      isValid = false,
       inputSize = 'md',
       fullWidth = true,
       resize = 'vertical',
@@ -185,15 +208,15 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           id={inputId}
           rows={rows}
-          className={`${getInputStyles(hasError, false, false, inputSize)} ${resizeStyles[resize]} min-h-[100px] ${className}`}
+          className={`${getInputStyles(hasError, isValid && !hasError, false, false, inputSize)} ${resizeStyles[resize]} min-h-[100px] ${className}`}
           aria-invalid={hasError}
           aria-describedby={error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined}
           {...props}
         />
         
         {error && (
-          <p id={`${inputId}-error`} className="mt-2 text-sm text-red-400 flex items-center gap-1">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <p id={`${inputId}-error`} className="mt-2 text-sm text-red-400 flex items-center gap-1 animate-in fade-in duration-200">
+            <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             {error}
