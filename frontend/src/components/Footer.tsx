@@ -167,7 +167,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-10 h-10 bg-gray-800/80 ${social.hoverColor} rounded-xl flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-lg`}
+                  className={`w-10 h-10 bg-gradient-to-br from-gray-700/80 to-gray-800/80 ${social.hoverColor} rounded-xl flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-lg shadow-sm border border-gray-700/40 hover:border-gray-500/60`}
                   aria-label={`Follow us on ${social.label}`}
                 >
                   {social.icon}
@@ -184,7 +184,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link 
                     href={link.href} 
-                    className="text-gray-400 hover:text-purple-400 transition-colors inline-flex items-center gap-1 group"
+                    className="text-gray-400 hover:text-purple-300 transition-all duration-200 inline-flex items-center gap-1 group font-medium hover:bg-purple-500/10 px-2 py-1 rounded-lg"
                   >
                     {link.label}
                     <svg className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
