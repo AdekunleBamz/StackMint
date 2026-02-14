@@ -49,14 +49,14 @@ export default function Breadcrumb() {
 
   return (
     <nav className="flex mb-6" aria-label="Breadcrumb">
-      <ol className="inline-flex items-center space-x-1 md:space-x-3">
+      <ol className="inline-flex items-center space-x-1 md:space-x-3 p-3 bg-gray-800/30 rounded-lg border border-gray-700/30 backdrop-blur-sm">
         <li className="inline-flex items-center">
           <Link
             href="/"
-            className="inline-flex items-center text-sm font-medium text-gray-400 hover:text-white transition-colors group"
+            className="inline-flex items-center text-sm font-medium text-gray-400 hover:text-purple-300 transition-all duration-200 group"
           >
             <svg 
-              className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-200" 
+              className="w-4 h-4 mr-2 group-hover:scale-110 group-hover:text-purple-400 transition-all duration-200" 
               fill="currentColor" 
               viewBox="0 0 20 20"
             >
@@ -73,7 +73,7 @@ export default function Breadcrumb() {
             <li key={item.href}>
               <div className="flex items-center">
                 <svg 
-                  className="w-6 h-6 text-gray-600" 
+                  className="w-5 h-5 text-gray-600 mx-1 hover:text-gray-500 transition-colors" 
                   fill="currentColor" 
                   viewBox="0 0 20 20"
                 >
@@ -81,7 +81,7 @@ export default function Breadcrumb() {
                 </svg>
                 {isLast ? (
                   <span 
-                    className="ml-1 text-sm font-medium text-purple-400 md:ml-2" 
+                    className="text-sm font-semibold text-purple-300 md:ml-1 bg-purple-500/10 px-2 py-1 rounded" 
                     aria-current="page"
                   >
                     {item.label}
@@ -89,7 +89,7 @@ export default function Breadcrumb() {
                 ) : (
                   <Link
                     href={item.href}
-                    className="ml-1 text-sm font-medium text-gray-400 hover:text-white md:ml-2 transition-colors"
+                    className="text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-700/40 px-2 py-1 rounded transition-all duration-200"
                   >
                     {item.label}
                   </Link>
