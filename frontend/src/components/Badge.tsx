@@ -48,13 +48,13 @@ interface BadgeProps {
 // ============================================================================
 
 const variantStyles: Record<BadgeVariant, string> = {
-  default: 'bg-gray-700/50 text-gray-300 border-gray-600/50',
-  success: 'bg-green-500/10 text-green-400 border-green-500/30',
-  warning: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30',
-  error: 'bg-red-500/10 text-red-400 border-red-500/30',
-  info: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
-  purple: 'bg-purple-500/10 text-purple-400 border-purple-500/30',
-  orange: 'bg-orange-500/10 text-orange-400 border-orange-500/30',
+  default: 'bg-gray-700/60 text-gray-200 border border-gray-600/60 shadow-sm shadow-gray-900/40',
+  success: 'bg-green-500/15 text-green-300 border border-green-500/40 shadow-sm shadow-green-900/30',
+  warning: 'bg-yellow-500/15 text-yellow-300 border border-yellow-500/40 shadow-sm shadow-yellow-900/30',
+  error: 'bg-red-500/15 text-red-300 border border-red-500/40 shadow-sm shadow-red-900/30',
+  info: 'bg-blue-500/15 text-blue-300 border border-blue-500/40 shadow-sm shadow-blue-900/30',
+  purple: 'bg-purple-500/15 text-purple-300 border border-purple-500/40 shadow-sm shadow-purple-900/30',
+  orange: 'bg-orange-500/15 text-orange-300 border border-orange-500/40 shadow-sm shadow-orange-900/30',
 };
 
 const dotColors: Record<BadgeVariant, string> = {
