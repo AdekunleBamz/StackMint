@@ -57,11 +57,11 @@ function LoadingSpinnerComponent({
     switch (variant) {
       case 'dots':
         return (
-          <div className="flex gap-1">
+          <div className="flex gap-1.5">
             {[0, 1, 2].map((i) => (
               <div
                 key={i}
-                className={`${dotSizes[size]} bg-purple-500 rounded-full animate-bounce`}
+                className={`${dotSizes[size]} bg-gradient-to-b from-purple-400 to-purple-600 rounded-full animate-bounce shadow-lg shadow-purple-500/30`}
                 style={{ animationDelay: `${i * 0.15}s` }}
               />
             ))}
@@ -71,21 +71,22 @@ function LoadingSpinnerComponent({
       case 'pulse':
         return (
           <div className="relative">
-            <div className={`${sizes[size]} bg-purple-500/30 rounded-full animate-ping absolute`} />
-            <div className={`${sizes[size]} bg-purple-500 rounded-full`} />
+            <div className={`${sizes[size]} bg-purple-500/40 rounded-full animate-ping absolute shadow-lg shadow-purple-500/40`} />
+            <div className={`${sizes[size]} bg-gradient-to-br from-purple-400 to-purple-600 rounded-full shadow-lg shadow-purple-500/30`} />
           </div>
         );
 
       case 'bars':
         return (
-          <div className="flex gap-1 items-end h-8">
+          <div className="flex gap-1.5 items-end h-8">
             {[0, 1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="w-1.5 bg-gradient-to-t from-purple-600 to-purple-400 rounded-full animate-pulse"
+                className="w-1.5 bg-gradient-to-t from-purple-600 via-purple-500 to-purple-400 rounded-full shadow-lg shadow-purple-500/20"
                 style={{ 
                   height: `${12 + i * 4}px`,
-                  animationDelay: `${i * 0.1}s` 
+                  animationDelay: `${i * 0.1}s`,
+                  animation: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite'
                 }}
               />
             ))}
@@ -96,7 +97,7 @@ function LoadingSpinnerComponent({
         return (
           <div className={`${sizes[size]} relative`}>
             <div className="absolute inset-0 rounded-full border-2 border-purple-500/20" />
-            <div className={`${sizes[size]} animate-spin rounded-full border-2 border-transparent border-t-purple-500 border-r-purple-500`} />
+            <div className={`${sizes[size]} animate-spin rounded-full border-2 border-transparent border-t-purple-400 border-r-purple-400 shadow-lg shadow-purple-500/20`} />
           </div>
         );
     }
