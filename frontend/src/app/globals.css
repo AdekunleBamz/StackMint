@@ -169,7 +169,21 @@
   
   /* Focus Visible Styles */
   :focus-visible {
-    @apply outline-none ring-2 ring-purple-500 ring-offset-2 ring-offset-gray-900;
+    @apply outline-none ring-2 ring-purple-400 ring-offset-2 ring-offset-gray-900;
+  }
+  
+  button:focus-visible {
+    @apply ring-2 ring-orange-400 ring-offset-2 ring-offset-gray-900;
+  }
+  
+  a:focus-visible {
+    @apply ring-2 ring-cyan-400 ring-offset-1 ring-offset-gray-900 rounded;
+  }
+  
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply ring-0;
   }
   
   /* Selection Styles */
