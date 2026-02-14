@@ -226,8 +226,9 @@ export function Modal({
             {showClose && (
               <button
                 onClick={onClose}
-                className="p-2 -mr-2 -mt-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 hover:rotate-90"
+                className="p-2 -mr-2 -mt-2 text-gray-300 hover:text-white hover:bg-red-500/20 bg-gray-700/20 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 hover:scale-110"
                 aria-label="Close modal"
+                title="Close (Esc)"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
