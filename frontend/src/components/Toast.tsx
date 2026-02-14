@@ -61,26 +61,30 @@ const icons: Record<ToastType, React.ReactNode> = {
   ),
 };
 
-const styles: Record<ToastType, { bg: string; icon: string; border: string }> = {
+const styles: Record<ToastType, { bg: string; icon: string; border: string; shadow: string }> = {
   success: {
-    bg: 'bg-green-900/90',
+    bg: 'bg-green-900/90 backdrop-blur-sm',
     icon: 'bg-green-500 text-white',
-    border: 'border-green-500/30',
+    border: 'border-green-500/40',
+    shadow: 'shadow-lg shadow-green-500/20',
   },
   error: {
-    bg: 'bg-red-900/90',
-    icon: 'bg-red-500 text-white',
-    border: 'border-red-500/30',
+    bg: 'bg-red-900/90 backdrop-blur-sm',
+    icon: 'bg-red-500 text-white animate-pulse',
+    border: 'border-red-500/40',
+    shadow: 'shadow-lg shadow-red-500/25',
   },
   warning: {
-    bg: 'bg-yellow-900/90',
+    bg: 'bg-yellow-900/90 backdrop-blur-sm',
     icon: 'bg-yellow-500 text-black',
-    border: 'border-yellow-500/30',
+    border: 'border-yellow-500/40',
+    shadow: 'shadow-lg shadow-yellow-500/20',
   },
   info: {
-    bg: 'bg-purple-900/90',
+    bg: 'bg-purple-900/90 backdrop-blur-sm',
     icon: 'bg-purple-500 text-white',
-    border: 'border-purple-500/30',
+    border: 'border-purple-500/40',
+    shadow: 'shadow-lg shadow-purple-500/20',
   },
 };
 
@@ -134,7 +138,7 @@ export default function Toast({
 
   return (
     <div 
-      className={`fixed bottom-4 right-4 max-w-sm w-full ${style.bg} backdrop-blur-xl border ${style.border} rounded-xl shadow-2xl overflow-hidden z-50 transition-all duration-300 ${
+      className={`fixed bottom-4 right-4 max-w-sm w-full ${style.bg} border ${style.border} ${style.shadow} rounded-xl overflow-hidden z-50 transition-all duration-300 ${
         isExiting ? 'opacity-0 translate-x-full scale-95' : 'opacity-100 translate-x-0 animate-slide-up'
       }`}
       role="alert"
