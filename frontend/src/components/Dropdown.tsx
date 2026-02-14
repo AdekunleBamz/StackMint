@@ -144,7 +144,7 @@ function DropdownComponent({
           role="menu"
           className={`
             absolute z-50 mt-2 py-1
-            bg-gray-900 border border-gray-800 rounded-xl shadow-2xl
+            bg-gradient-to-b from-gray-800/95 to-gray-900/95 backdrop-blur-sm border border-gray-700/50 rounded-xl shadow-xl shadow-black/40
             animate-fade-in-down
             ${widthClasses[width]}
             ${align === 'right' ? 'right-0' : 'left-0'}
@@ -155,7 +155,7 @@ function DropdownComponent({
               return (
                 <div 
                   key={`divider-${index}`} 
-                  className="my-1 border-t border-gray-800" 
+                  className="my-1.5 border-t border-gray-700/40" 
                 />
               );
             }
@@ -167,18 +167,20 @@ function DropdownComponent({
               <button
                 key={item.id}
                 role="menuitem"
+                tabIndex={isFocused ? 0 : -1}
                 onClick={() => handleItemClick(item)}
                 disabled={item.disabled}
                 className={`
-                  w-full flex items-center gap-3 px-4 py-2.5 text-left text-sm
-                  transition-colors
+                  w-full flex items-center gap-3 px-4 py-2.5 text-left text-sm font-medium
+                  transition-all duration-150
                   ${item.disabled 
-                    ? 'opacity-50 cursor-not-allowed text-gray-500' 
+                    ? 'opacity-40 cursor-not-allowed text-gray-600' 
                     : item.danger
-                      ? 'text-red-400 hover:bg-red-500/10 hover:text-red-300'
-                      : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+                      ? 'text-red-400 hover:bg-red-500/20 hover:text-red-300'
+                      : 'text-gray-200 hover:bg-gray-700/60 hover:text-white'
                   }
-                  ${isFocused ? 'bg-gray-800 text-white' : ''}
+                  ${isFocused ? 'bg-purple-500/20 text-white' : ''}
+                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500
                 `}
               >
                 {item.icon && (
@@ -188,7 +190,7 @@ function DropdownComponent({
                 )}
                 <span className="flex-1">{item.label}</span>
                 {item.shortcut && (
-                  <span className="text-xs text-gray-500 ml-auto">
+                  <span className="text-xs text-gray-500 ml-auto font-mono">
                     {item.shortcut}
                   </span>
                 )}
