@@ -48,26 +48,30 @@ const icons: Record<AlertType, ReactNode> = {
   ),
 };
 
-const typeStyles: Record<AlertType, { container: string; icon: string; title: string }> = {
+const typeStyles: Record<AlertType, { container: string; icon: string; title: string; border: string }> = {
   info: {
-    container: 'bg-blue-500/10 border-blue-500/30',
+    container: 'bg-blue-500/10 border-blue-500/30 hover:bg-blue-500/15',
     icon: 'text-blue-400',
     title: 'text-blue-300',
+    border: 'border-l-4 border-l-blue-500',
   },
   success: {
-    container: 'bg-green-500/10 border-green-500/30',
+    container: 'bg-green-500/10 border-green-500/30 hover:bg-green-500/15',
     icon: 'text-green-400',
     title: 'text-green-300',
+    border: 'border-l-4 border-l-green-500',
   },
   warning: {
-    container: 'bg-yellow-500/10 border-yellow-500/30',
+    container: 'bg-yellow-500/10 border-yellow-500/30 hover:bg-yellow-500/15',
     icon: 'text-yellow-400',
     title: 'text-yellow-300',
+    border: 'border-l-4 border-l-yellow-500',
   },
   error: {
-    container: 'bg-red-500/10 border-red-500/30',
-    icon: 'text-red-400',
-    title: 'text-red-300',
+    container: 'bg-red-500/15 border-red-500/40 hover:bg-red-500/20 shadow-lg shadow-red-500/10',
+    icon: 'text-red-400 animate-pulse',
+    title: 'text-red-300 font-semibold',
+    border: 'border-l-4 border-l-red-500',
   },
 };
 
@@ -96,9 +100,10 @@ function AlertComponent({
     <div
       role="alert"
       className={`
-        relative flex gap-3 p-4 rounded-xl border
+        relative flex gap-3 p-4 rounded-xl border transition-all duration-200
+        ${styles.border}
         ${styles.container}
-        ${className}
+        ${className} animate-in fade-in slide-in-from-top-2 duration-300
       `}
     >
       {/* Icon */}
