@@ -147,12 +147,12 @@ function RadioItem<T extends string>({ option }: RadioItemProps<T>) {
         onClick={handleChange}
         disabled={isDisabled}
         className={`
-          ${config.button} rounded-lg font-medium transition-all
+          ${config.button} rounded-lg font-medium transition-all duration-200
           ${isSelected
-            ? 'bg-purple-500 text-white'
-            : 'bg-zinc-700 text-zinc-300 hover:bg-zinc-600'
+            ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50'
+            : 'bg-gray-700 text-gray-300 hover:bg-gray-600 border border-gray-600/50'
           }
-          ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+          ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:scale-105'}
         `}
       >
         {option.label}
