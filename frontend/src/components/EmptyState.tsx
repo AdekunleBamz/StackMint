@@ -140,14 +140,14 @@ function EmptyStateComponent({
   };
 
   return (
-    <div className={`flex flex-col items-center justify-center text-center ${sizeClasses[size].container} ${className}`}>
+    <div className={`flex flex-col items-center justify-center text-center ${sizeClasses[size].container} ${className} bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl border border-gray-700/40 animated-in fade-in-50 duration-500`}>
       {/* Animated icon */}
-      <div className={`${sizeClasses[size].icon} mb-4 animate-bounce-gentle`}>
+      <div className={`${sizeClasses[size].icon} mb-6 animate-float drop-shadow-lg`}>
         {displayIcon}
       </div>
       
       {/* Title */}
-      <h3 className={`${sizeClasses[size].title} font-semibold text-white mb-2`}>
+      <h3 className={`${sizeClasses[size].title} font-semibold text-white mb-3`}>
         {displayTitle}
       </h3>
       
@@ -160,11 +160,11 @@ function EmptyStateComponent({
       
       {/* Actions */}
       {(actionLabel || secondaryAction) && (
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-center gap-3">
           {actionLabel && (
             <button
               onClick={action?.onClick}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-xl transition-colors shadow-lg shadow-purple-500/25"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white font-medium rounded-xl transition-all duration-200 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/40 hover:scale-105"
             >
               {actionLabel}
             </button>
@@ -172,7 +172,7 @@ function EmptyStateComponent({
           {secondaryAction && (
             <button
               onClick={secondaryAction.onClick}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 font-medium rounded-xl transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gray-800/60 hover:bg-gray-700/60 text-gray-300 font-medium rounded-xl transition-all duration-200 border border-gray-700/40 hover:border-gray-600/60"
             >
               {secondaryAction.label}
             </button>
