@@ -272,7 +272,7 @@ export function Tooltip({
   const tooltipContent = isVisible && position && (
     <div
       ref={tooltipRef}
-      className={`fixed z-[100] px-3 py-2 text-sm text-white bg-gray-900/95 backdrop-blur-sm border border-gray-700/50 rounded-lg shadow-xl shadow-black/50 animate-fade-in ${className}`}
+      className={`fixed z-[100] px-3 py-2 text-sm text-white bg-gradient-to-br from-gray-800 to-gray-900/95 backdrop-blur-sm border border-purple-500/30 rounded-lg shadow-xl shadow-purple-500/20 animate-fade-in ${className}`}
       style={{
         top: position.top,
         left: position.left,
@@ -284,7 +284,7 @@ export function Tooltip({
       <div className="relative z-10">{content}</div>
       {arrow && (
         <div
-          className="absolute w-2 h-2 bg-gray-900/95 border-gray-700/50"
+          className="absolute w-2 h-2 bg-gradient-to-br from-gray-800 to-gray-900/95 border-purple-500/30"
           style={{
             ...arrowStyles[position.placement],
             borderWidth: position.placement === 'top' || position.placement === 'left' ? '0 1px 1px 0' : '1px 0 0 1px',
@@ -330,7 +330,7 @@ export function InfoTooltip({
     <Tooltip content={content} placement={placement} className={className}>
       <button
         type="button"
-        className={`inline-flex items-center justify-center w-4 h-4 text-gray-400 hover:text-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-full ${iconClassName}`}
+        className={`inline-flex items-center justify-center w-5 h-5 text-gray-400 hover:text-purple-300 hover:bg-purple-500/10 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-full ${iconClassName}`}
         aria-label="More information"
       >
         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
