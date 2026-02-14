@@ -37,11 +37,11 @@ export function Skeleton({
 
   return (
     <div
-      className={`bg-gradient-to-r from-gray-700/50 via-gray-600/50 to-gray-700/50 background-animate ${roundedClasses[rounded]} ${animate ? 'animate-pulse' : ''} ${className}`}
+      className={`bg-gradient-to-r from-gray-700/30 via-gray-500/30 to-gray-700/30 ${roundedClasses[rounded]} ${animate ? 'animate-shimmer' : ''} ${className}`}
       style={{
         ...style,
         backgroundSize: '200% 100%',
-        animation: animate ? 'shimmer 2s ease-in-out infinite' : undefined,
+        animation: animate ? 'shimmer 2.5s ease-in-out infinite' : undefined,
       }}
       aria-hidden="true"
       role="presentation"
@@ -96,7 +96,7 @@ export function NFTCardSkeleton({
 }: NFTCardSkeletonProps) {
   return (
     <div
-      className={`bg-gray-800/50 border border-gray-700/50 rounded-2xl overflow-hidden ${className}`}
+      className={`bg-gradient-to-br from-gray-800/60 to-gray-900/60 border border-gray-700/60 rounded-2xl overflow-hidden shadow-lg ${className}`}
     >
       {/* Image */}
       <Skeleton className="aspect-square w-full" rounded="none" />
@@ -104,24 +104,24 @@ export function NFTCardSkeleton({
       {/* Content */}
       <div className="p-4 space-y-3">
         {/* Title */}
-        <Skeleton className="h-5 w-3/4" />
+        <Skeleton className="h-5 w-3/4 rounded-lg" />
 
         {/* Creator */}
         {showCreator && (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 pt-1">
             <Skeleton className="w-6 h-6" rounded="full" />
-            <Skeleton className="h-3 w-24" />
+            <Skeleton className="h-3 w-24 rounded-md" />
           </div>
         )}
 
         {/* Price */}
         {showPrice && (
-          <div className="flex items-center justify-between pt-2 border-t border-gray-700/50">
+          <div className="flex items-center justify-between pt-3 border-t border-gray-700/40">
             <div>
-              <Skeleton className="h-3 w-12 mb-1" />
-              <Skeleton className="h-5 w-20" />
+              <Skeleton className="h-3 w-12 mb-2 rounded-md" />
+              <Skeleton className="h-5 w-20 rounded-lg" />
             </div>
-            <Skeleton className="h-8 w-16" rounded="lg" />
+            <Skeleton className="h-8 w-16 rounded-lg" />
           </div>
         )}
       </div>
