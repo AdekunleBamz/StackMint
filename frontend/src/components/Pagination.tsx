@@ -124,7 +124,7 @@ function PaginationComponent({
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          className="p-2 text-gray-400 hover:text-white hover:bg-purple-500/20 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 border border-gray-700/40 hover:border-purple-500/40"
           aria-label="Previous page"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,10 +144,11 @@ function PaginationComponent({
                 key={page}
                 onClick={() => onPageChange(page)}
                 className={`
-                  min-w-[40px] h-10 px-3 text-sm font-medium rounded-lg transition-all
+                  min-w-[40px] h-10 px-3 text-sm font-medium rounded-lg transition-all duration-200 border
                   ${currentPage === page
-                    ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/25'
-                    : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                    ? 'bg-gradient-to-r from-purple-600 to-purple-500 text-white shadow-lg shadow-purple-500/30 border-purple-500/50'
+                    : 'text-gray-400 hover:text-white hover:bg-gray-800/60 border-gray-700/40 hover:border-gray-600/60'
+
                   }
                 `}
                 aria-current={currentPage === page ? 'page' : undefined}
